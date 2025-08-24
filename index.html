@@ -12,211 +12,271 @@
   <!--Robots-->
   <meta content="index, follow" name="robots"></meta>
 
-  <!--Fonts and Styles-->
-  <link href="https://fonts.googleapis.com" rel="preconnect"></link>
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"></link>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"></link>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743" crossorigin="anonymous"></script>
 
-  <link href="styles/general.css" rel="stylesheet"></link>
-  <link href="styles/header.css" rel="stylesheet"></link>
-  <link href="styles/video.css" rel="stylesheet"></link>
-  <link href="styles/sidebar.css" rel="stylesheet"></link>
+  <style>
+    body {
+      background-color: #0b0b0b;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-
-  <main>
-    <section style="text-align: center;">
-
- <!--Movie-Style Search Box-->
-</span></p><div class="movie-search-box"><span style="font-size: x-large;">
-  <form action="https://www.paypalads.com/search/label/movies1000" method="get" style="text-align: center;">
-  
-  
-  <!--Big Movie-Style Search Box-->
-<div class="movie-search-box">
-  
-    <input name="q" placeholder="🔍 Search for movies, shows, actors..." required="" type="text" />
-    <button type="submit"><b><b><a href="https://www.paypalads.com/search/label/movies1000" target="_blank" rel="nofollow">Search</a></b></b></button>
-  
-</div></form>
-
-<style>
-  .movie-search-box {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 20px;
-  }
-
-  .movie-search-box form {
-    display: flex;
-    background: #1c1c1c;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-  }
-
-  .movie-search-box input[type="text"] {
-    flex: 1;
-    padding: 20px 24px;
-    font-size: 20px;
-    border: none;
-    outline: none;
-    background-color: #111;
-    color: #fff;
-    font-family: 'Segoe UI', sans-serif;
-  }
-
-  .movie-search-box input::placeholder {
-    color: #bbb;
-    font-size: 18px;
-  }
-
-  .movie-search-box button {
-    padding: 0 30px;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: #e50914;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .movie-search-box button:hover {
-    background-color: #b00610;
-  }
-
-  @media (max-width: 600px) {
     .movie-search-box {
-      padding: 0 15px;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
     }
 
     .movie-search-box form {
-      flex-direction: column;
-    }
-
-    .movie-search-box input[type="text"],
-    .movie-search-box button {
-      width: 100%;
-      font-size: 28px;
-      padding: 16px;
+      display: flex;
+      background: #1c1c1c;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
 
     .movie-search-box input[type="text"] {
-      border-radius: 30px 30px 0 0;
+      flex: 1;
+      padding: 20px 24px;
+      font-size: 20px;
+      border: none;
+      outline: none;
+      background-color: #111;
+      color: #fff;
+    }
+
+    .movie-search-box input::placeholder {
+      color: #bbb;
+      font-size: 18px;
     }
 
     .movie-search-box button {
-      border-radius: 0 0 30px 30px;
+      padding: 0 30px;
+      font-size: 20px;
+      font-weight: bold;
+      background-color: #e50914;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
     }
-  }
-</style>
 
-  
- <!--Movie Site Menu-->
-<style>
-  .movie-menu {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 20px;
-    justify-content: center;
-    background-color: #111;
-    font-family: 'Segoe UI', sans-serif;
-  }
+    .movie-search-box button:hover {
+      background-color: #b00610;
+    }
 
-  .movie-menu a {
-    background-color: #e50914;
-    color: white;
-    text-decoration: none;
-    padding: 10px 16px;
-    border-radius: 30px;
-    font-size: 15px;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: background 0.3s ease;
-  }
+    @media (max-width: 600px) {
+      .movie-search-box form {
+        flex-direction: column;
+      }
 
-  .movie-menu a:hover {
-    background-color: #b00610;
-  }
+      .movie-search-box input[type="text"],
+      .movie-search-box button {
+        width: 100%;
+        font-size: 28px;
+        padding: 16px;
+      }
 
-  @media (max-width: 600px) {
+      .movie-search-box input[type="text"] {
+        border-radius: 30px 30px 0 0;
+      }
+
+      .movie-search-box button {
+        border-radius: 0 0 30px 30px;
+      }
+    }
+
     .movie-menu {
-      padding: 15px;
-      gap: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 20px;
+      justify-content: center;
+      background-color: #111;
     }
 
     .movie-menu a {
-      font-size: 14px;
-      padding: 8px 12px;
+      background-color: #e50914;
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.3s ease;
     }
-  }
-</style>
 
-  <div style='width: 100%; height: 10px; background-color: green; margin: 10px 0;'/>
-                
-                 <div id='ad-rotation-container' style='min-height: 100px;'/>
+    .movie-menu a:hover {
+      background-color: #b00610;
+    }
 
-<script>
-  const adUnits = [
-    `
-    <!-- Square ads -->
-    <ins class='adsbygoogle' data-ad-client='ca-pub-2269884583846743' data-ad-format='auto' data-ad-slot='3828853509' data-full-width-responsive='true' style='display:block'/>
-    `,
-    `
-    <!-- Horizontal ads -->
-    <ins class='adsbygoogle' data-ad-client='ca-pub-2269884583846743' data-ad-format='auto' data-ad-slot='1481343022' data-full-width-responsive='true' style='display:block'/>
-    `,
-    `
-    <!-- In-article ad -->
-    <ins class='adsbygoogle' data-ad-client='ca-pub-2269884583846743' data-ad-format='auto' data-ad-layout='in-article' data-ad-slot='2115767840' style='display:block; text-align:center;'/>
-    `,
-    `
-    <!-- Fluid ad with layout key -->
-    <ins class='adsbygoogle' data-ad-client='ca-pub-2269884583846743' data-ad-format='auto' data-ad-layout-key='-d6+5n-2s-nh+175' data-ad-slot='3580304316' style='display:block'/>
-    `
-  ];
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
 
-  let currentAdIndex = 0;
-  const container = document.getElementById(&quot;ad-rotation-container&quot;);
+    .movie-card {
+      background: #111;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+      transition: transform 0.3s ease;
+    }
 
-  function loadAd(index) {
-    container.innerHTML = adUnits[index];
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+
+    .poster {
+      position: relative;
+      aspect-ratio: 2/3;
+      overflow: hidden;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.4s ease-in-out;
+    }
+
+    .movie-card:hover img {
+      filter: brightness(0.5);
+      transform: scale(1.05);
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+      color: white;
+      background: rgba(229, 9, 20, 0.9);
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      line-height: 70px;
+      box-shadow: 0 0 20px #e50914;
+      pointer-events: none;
+    }
+
+    .movie-title {
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      background: #e50914;
+      color: white;
+      text-transform: capitalize;
+    }
+
+    @media (max-width: 600px) {
+      .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        padding: 15px;
+      }
+
+      .movie-title {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .play-button {
+        font-size: 36px;
+        width: 55px;
+        height: 55px;
+        line-height: 55px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Search Box -->
+  <div class="movie-search-box">
+    <form action="/search" method="get">
+      <input name="q" placeholder="🔍 Search for movies, shows, actors..." required type="text" />
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <!-- Ad Section -->
+  <div style="width: 100%; height: 10px; background-color: orange; margin: 10px 0;"></div>
+
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2269884583846743"
+       data-ad-slot="3828853509"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
-  }
+  </script>
 
-  // Load first ad
-  loadAd(currentAdIndex);
+  <div style="width: 100%; height: 10px; background-color: green; margin: 10px 0;"></div>
 
-  // Rotate every 35 seconds
-  setInterval(() =&gt; {
-    currentAdIndex = (currentAdIndex + 1) % adUnits.length;
-    loadAd(currentAdIndex);
-  }, 35000); // 35000ms = 35 seconds
-</script>
+  <!-- Movie Site Menu -->
+  <div class="movie-menu">
+    <a href="/search/label/VJ-JUNIOR">👁️ VJ JUNIOR</a>
+    <a href="/search/label/VJ-ULIO">👁️ VJ ULIO</a>
+    <a href="/search/label/VJ-Ice-P">👁️ VJ Ice P</a>
+    <a href="/search/label/VJ-Kevo">👁️ VJ Kevo</a>
+    <a href="/search/label/VJ-Jingo">👁️ VJ Jingo</a>
+    <a href="/search/label/VJ-Emmy">👁️ VJ Emmy</a>
+    <a href="/search/label/Action">👁️ Action</a>
+    <a href="/search/label/SciFi">👁️ SciFi</a>
+    <a href="/search/label/Adventure">👁️ Adventure</a>
+    <a href="/search/label/Cartoons">👁️ Cartoons</a>
+    <a href="/search/label/Series">👁️ Series</a>
+  </div>
 
-<!-- Only one async script call is needed -->
-<script async='async' crossorigin='anonymous' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743'/>
-                        
-<style>
-.sora-ads-full {
- display: block;
-    background-color: rgb(0 0 0 / 10%);
-    text-align: center;
-    font-size: 13px;
-    color: #aaaaaa;
-    font-weight: 400;
-    font-style: italic;
-    line-height: 88px;
-    border: 1px solid rgb(0 0 0 / 10%);
-}
-</style>
+  <!-- Movie Post Grid -->
+  <div id="movie-label-posts"></div>
 
-<div style='width: 100%; height: 10px; background-color: orange; margin: 10px 0;'/
-  
-  <!--Movie Post Grid with Stylish Play Button-->
+  <script>
+    function renderMovieLabelPosts(json) {
+      var postsHTML = '<div class="movie-grid">';
+      for (var i = 0; i < json.feed.entry.length; i++) {
+        var entry = json.feed.entry[i];
+        var title = entry.title.$t;
+        var url = '';
+        for (var j = 0; j < entry.link.length; j++) {
+          if (entry.link[j].rel === 'alternate') {
+            url = entry.link[j].href;
+            break;
+          }
+        }
+
+        var imgUrl = '';
+        if (entry.media$thumbnail) {
+          imgUrl = entry.media$thumbnail.url.replace('/s72-c/', '/s640/');
+        } else {
+          var content = entry.content.$t;
+          var imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+          imgUrl = imgMatch && imgMatch[1] ? imgMatch[1] : 'https://via.placeholder.com/300x450?text=No+Image';
+        }
+
+        postsHTML += `
+          <div class="movie-card">
+            <a href="${url}" title="${title}">
+              <div class="poster">
+                <img src="${imgUrl}" alt="${title}">
+                <div class="play-button">&#9658;</div>
+              </div>
+              <div class="
+              
+              <!--Movie Post Grid with Stylish Play Button-->
 <div id="movie-label-posts"></div>
 
 <script type="text/javascript">
@@ -258,18 +318,55 @@
     document.getElementById('movie-label-posts').innerHTML = postsHTML;
   }
 </script>
-  
+
+
+<!--Movie Post Grid with Stylish Play Button-->
+<div id="movie-label-posts"></div>
+
+<script type="text/javascript">
+  function renderMovieLabelPosts(json) {
+    var postsHTML = '<div class="movie-grid">';
+    for (var i = 0; i < json.feed.entry.length; i++) {
+      var entry = json.feed.entry[i];
+      var title = entry.title.$t;
+      var url = '';
+      for (var j = 0; j < entry.link.length; j++) {
+        if (entry.link[j].rel === 'alternate') {
+          url = entry.link[j].href;
+          break;
+        }
+      }
+
+      var imgUrl = '';
+      if (entry.media$thumbnail) {
+        imgUrl = entry.media$thumbnail.url.replace('/s72-c/', '/s640/');
+      } else {
+        var content = entry.content.$t;
+        var imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+        imgUrl = imgMatch && imgMatch[1] ? imgMatch[1] : 'https://via.placeholder.com/300x450?text=No+Image';
+      }
+
+      postsHTML += `
+        <div class="movie-card">
+          <a href="${url}" title="${title}">
+            <div class="poster">
+              <img src="${imgUrl}" alt="${title}">
+              <div class="play-button">&#9658;</div>
+            </div>
+            <div class="movie-title">${title}</div>
+          </a>
+        </div>
+      `;
+    }
+    postsHTML += '</div>';
+    document.getElementById('movie-label-posts').innerHTML = postsHTML;
+  }
+</script>
 
 <!--Blogger JSON Feed for label "movies1000"-->
-<script src="https://44dfffx.blogspot.com/feeds/posts/default/-/movies1000?alt=json-in-script&amp;callback=renderMovieLabelPosts"></script>
+<script src="https://www.paypalads.com/feeds/posts/default/-/movies1000?alt=json-in-script&amp;callback=renderMovieLabelPosts"></script>
 
 <style>
-  body {
-    background-color: #0b0b0b;
-    color: #fff;
-    font-family: 'Segoe UI', sans-serif;
-  }
-
   .movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -356,8 +453,6 @@
   }
 </style>
 
-</body>
-
 </script></span></b></span></strong></div><ul class="wp-block-list"><li style="text-align: center;"><a href="https://www.paypalads.com/search" style="font-size: large;" target="_blank">Search</a><span style="font-size: large;">&nbsp;|&nbsp;</span><a href="https://www.paypalads.com/p/contact-us.html" style="font-size: large;" target="_blank">Contact US</a></li><li style="text-align: center;"><span style="font-size: medium;"><a href="https://www.paypalads.com/p/privacy-policy.html" target="_blank">Privacy policy</a>&nbsp;|&nbsp;<a href="https://www.paypalads.com/p/affiliate-marketing-and-adsense.html" target="_blank">Disclosure</a></span></li><span style="font-size: medium;"><!--/wp:list-item--><!--wp:list-item-->
 <!--/wp:list-item-->
 
@@ -369,6 +464,5 @@
 <p></p>
  </section></main>
 
-</section>
-  </main>
+</body>
 </html>
