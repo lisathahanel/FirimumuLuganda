@@ -103,50 +103,21 @@
 </head>
 <body>
 
- <!-- Ad Section -->
+  <!-- Ad Section -->
   <div style="width: 100%; height: 10px; background-color: orange; margin: 10px 0;"></div>
 
-<!-- Sticky Top Ad Container -->
-<div id='sticky-ad-wrapper' style='position:sticky; top:0; z-index:9999; background:#fff; border-bottom:1px solid #ddd;'>
-  <div id='ad-rotation-container' style='min-height: 100px; text-align:center;'/>
-</div>
-
-<!-- Ad Rotation Script -->
-<script>
-  const adUnits = [
-    `
-    <!-- Square ad -->
-    <ins class='adsbygoogle' data-ad-client='ca-pub-2269884583846743' data-ad-format='auto' data-ad-slot='3828853509' data-full-width-responsive='true' style='display:block'/>
-    `,
-    `
-    <!-- Horizontal ad -->
-    <ins class='adsbygoogle' data-ad-client='ca-pub-2269884583846743' data-ad-format='auto' data-ad-slot='1481343022' data-full-width-responsive='true' style='display:block'/>
-    `
-  ];
-
-  let currentAdIndex = 0;
-  const container = document.getElementById(&quot;ad-rotation-container&quot;);
-
-  function loadAd(index) {
-    container.innerHTML = adUnits[index];
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2269884583846743"
+       data-ad-slot="3828853509"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
-  }
-
-  // Load initial ad
-  loadAd(currentAdIndex);
-
-  // Rotate ads every 35 seconds
-  setInterval(() =&gt; {
-    currentAdIndex = (currentAdIndex + 1) % adUnits.length;
-    loadAd(currentAdIndex);
-  }, 35000);
-</script>
-
-<!-- Google AdSense Script -->
-<script async='async' crossorigin='anonymous' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743'/>
-
+  </script>
 
   <div style="width: 100%; height: 10px; background-color: green; margin: 10px 0;"></div>
+
   <!-- 🎬 Video Player with Ad Overlay -->
   <div class="video-wrapper">
     <iframe class="video-iframe" src="https://jtzmag.com/movie/Superman.html"></iframe>
@@ -407,6 +378,21 @@
   }
 </style>
 
+ <!-- Ad Section -->
+  <div style="width: 100%; height: 10px; background-color: orange; margin: 10px 0;"></div>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-2269884583846743"
+     data-ad-slot="9322391019"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+  <div style="width: 100%; height: 10px; background-color: green; margin: 10px 0;"></div>
 
 <!-- Scroll to Top Gadget --> 
 <div id="scrollToTopGadget"></div>
