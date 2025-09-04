@@ -1,397 +1,297 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743" crossorigin="anonymous" type="af06e34e3ff1722d01e1abe4-text/javascript"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"
+     crossorigin="anonymous"></script>
 
-  <script async src="https://fundingchoicesmessages.google.com/i/pub-2269884583846743?ers=1" type="af06e34e3ff1722d01e1abe4-text/javascript"></script><script type="af06e34e3ff1722d01e1abe4-text/javascript">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+  <script async src="https://fundingchoicesmessages.google.com/i/pub-2269884583846743?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
   
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VJ Junio - Army of Thieves</title>
  
-  <meta charset="UTF-8"></meta>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
-  <title>Army of Thieves | VJ Junior translated movie</title>
-
   <!--SEO Meta Description-->
-  <meta content="Enjogerere Army of Thieves translated by Vj Junior Watch and Download full Movie translated by VJ Junior #Kagujje #uganda" name="description"></meta>
+  <meta content="Enjogerere Army of Thieves translated by vj Junio Watch and Download full Movie translated by vj ulio #Kagujje #uganda" name="description"></meta>
 
   <!--Robots-->
   <meta content="index, follow" name="robots"></meta>
 
-  <!--Fonts and Styles-->
-  <link href="styles/general.css" rel="stylesheet"></link>
-  <link href="styles/header.css" rel="stylesheet"></link>
-  <link href="styles/video.css" rel="stylesheet"></link>
-  <link href="styles/sidebar.css" rel="stylesheet"></link>
-
-
-  <main>
-    <section style="text-align: center;">
-
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Video with Skippable Ad & Refresh</title>
-
-  <!-- ✅ Google AdSense Script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743" crossorigin="anonymous" type="af06e34e3ff1722d01e1abe4-text/javascript"></script>
 
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      height: 100%;
+      background: #000;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+    .video-container {
+      position: relative;
+      width: 80%;
+      max-width: 800px;
+      margin: 20px auto;
       background: #000;
     }
-
-    .video-wrapper {
-      position: relative;
+    video {
       width: 100%;
-      height: 500px;
+      display: block;
     }
-
-    .video-iframe {
+    .ad-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-      width: 100%;
-      height: 500px;
-      border: none;
-    }
-
-    #yt-style-ad {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 500px;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 2;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      transition: transform 0.5s ease, opacity 0.5s ease;
+      z-index: 10;
+    }
+    .skip-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #444;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .skip-btn.enabled {
+      background: #f00;
+      cursor: pointer;
+      opacity: 1;
     }
 
-    #yt-style-ad.hidden {
-      transform: translateY(100%);
-      opacity: 0;
+    /* === Movie Slider Styles === */
+    .movie-slider-wrapper {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 20px 0;
+    }
+    .movie-slider {
+      display: flex;
+      gap: 20px;
+      padding: 10px 30px;
+    }
+    .movie-card {
+      min-width: 180px;
+      max-width: 180px;
+      background: #111;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+    .poster {
+      position: relative;
+      aspect-ratio: 2/3;
+      overflow: hidden;
+    }
+    .movie-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: 0.3s ease;
+    }
+    .movie-card:hover img {
+      filter: brightness(0.5);
+      transform: scale(1.05);
+    }
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+      color: white;
+      background: rgba(229, 9, 20, 0.9);
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      line-height: 70px;
+      box-shadow: 0 0 20px #e50914;
       pointer-events: none;
     }
-
-    #yt-skip-btn {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      padding: 10px 20px;
-      background-color: red;
+    .movie-title {
+      text-align: center;
+      background: #e50914;
       color: white;
-      border: none;
-      font-size: 14px;
-      opacity: 0.6;
-      cursor: not-allowed;
+      padding: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      text-transform: capitalize;
     }
-
-    #yt-skip-btn.enabled {
-      opacity: 1;
-      cursor: pointer;
+    @media (max-width: 600px) {
+      .movie-card {
+        min-width: 130px;
+        max-width: 130px;
+      }
+      .play-button {
+        font-size: 36px;
+        width: 55px;
+        height: 55px;
+        line-height: 55px;
+      }
+      .movie-title {
+        font-size: 13px;
+        padding: 8px;
+      }
+      .movie-slider {
+        gap: 14px;
+        padding: 10px 20px;
+      }
     }
   </style>
+
+  <!-- ✅ Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
-
-  <!-- 🎬 Video Player with Ad Overlay -->
-  <div class="video-wrapper">
-    <iframe class="video-iframe" src="https://movies.ug/videos/Matthias%20Schweigh%C3%B6fer-Army%20of%20Thieves%20(2021).mp4"></iframe>
+  <!-- 🎬 Video Player -->
+  <div class="video-container">
+    <video id="mainVideo" controls>
+      <source src="https://movies.ug/videos/Matthias%20Schweigh%C3%B6fer-Army%20of%20Thieves%20(2021).mp4" type="video/mp4"/>
+      Your browser does not support HTML5 video.
+    </video>
 
     <!-- 🟡 Ad Overlay -->
-    <div id="yt-style-ad">
-      <!-- Ad will be injected dynamically -->
-      <button id="yt-skip-btn" disabled>Skip in 5...</button>
+    <div class="ad-overlay" id="adOverlay">
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:300px;height:250px"
+           data-ad-client="ca-pub-2269884583846743"
+           data-ad-slot="1234567890"></ins>
+      <button id="skipBtn" class="skip-btn" disabled>Skip in 5...</button>
     </div>
   </div>
 
-  <!-- 🧠 JavaScript Logic -->
-  <script type="af06e34e3ff1722d01e1abe4-text/javascript">
-    document.addEventListener("DOMContentLoaded", () => {
-      const adOverlay = document.getElementById('yt-style-ad');
-      const skipBtn = document.getElementById('yt-skip-btn');
+  <!-- 🎞️ Movie Auto-Slider Grid -->
+  <div class="movie-slider-wrapper">
+    <div id="movie-slider" class="movie-slider"></div>
+  </div>
 
-      let adTimer = null;
-      let countdown = null;
-
-      // Ad unit rotation (optional - use only one if needed)
-      const adSlots = ['2115767840']; // Add more ad slot IDs to rotate
-      let currentSlotIndex = 0;
-
-      function showAd() {
-        let secondsLeft = 5;
-
-        // Clear any existing ad element before injecting a new one
-        const oldAds = adOverlay.querySelectorAll('.adsbygoogle');
-        oldAds.forEach(el => el.remove());
-
-        // Create new ad element
-        const adUnit = document.createElement('ins');
-        adUnit.className = 'adsbygoogle';
-        adUnit.style.display = 'block';
-        adUnit.setAttribute('data-ad-client', 'ca-pub-2269884583846743');
-        adUnit.setAttribute('data-ad-slot', adSlots[currentSlotIndex % adSlots.length]);
-        adUnit.setAttribute('data-ad-format', 'auto');
-        adUnit.setAttribute('data-full-width-responsive', 'true');
-
-        adOverlay.insertBefore(adUnit, skipBtn);
-
-        try {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-          console.warn('AdSense load error:', e);
-        }
-
-        currentSlotIndex++; // rotate slot for next time (if more than one)
-
-        // Reset ad overlay visibility and skip button
-        adOverlay.classList.remove('hidden');
-        skipBtn.disabled = true;
-        skipBtn.classList.remove('enabled');
-        skipBtn.textContent = `Skip in ${secondsLeft}...`;
-
-        // Countdown logic
-        countdown = setInterval(() => {
-          secondsLeft--;
-          if (secondsLeft > 0) {
-            skipBtn.textContent = `Skip in ${secondsLeft}...`;
-          } else {
-            clearInterval(countdown);
-            skipBtn.textContent = 'Skip Ad';
-            skipBtn.disabled = false;
-            skipBtn.classList.add('enabled');
+  <!-- Blogger Feed -->
+  <script type="text/javascript">
+    function renderMovieSlider(json) {
+      var postsHTML = '';
+      var maxPosts = 10;
+      for (var i = 0; i < Math.min(json.feed.entry.length, maxPosts); i++) {
+        var entry = json.feed.entry[i];
+        var title = entry.title.$t;
+        var url = '';
+        for (var j = 0; j < entry.link.length; j++) {
+          if (entry.link[j].rel === 'alternate') {
+            url = entry.link[j].href;
+            break;
           }
-        }, 1000);
-      }
-
-      // Initial ad on page load
-      showAd();
-
-      // Skip button logic
-      skipBtn.addEventListener('click', () => {
-        if (!skipBtn.disabled) {
-          adOverlay.classList.add('hidden'); // swipe away
-          clearInterval(countdown);
-
-          // Schedule the next ad in 10 minutes
-          if (adTimer) clearTimeout(adTimer);
-          adTimer = setTimeout(() => {
-            showAd();
-          }, 10 * 60 * 1000); // 10 minutes
         }
-      });
+
+        var imgUrl = '';
+        if (entry.media$thumbnail) {
+          imgUrl = entry.media$thumbnail.url.replace('/s72-c/', '/s640/');
+        } else {
+          var content = entry.content.$t;
+          var imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+          imgUrl = imgMatch && imgMatch[1] ? imgMatch[1] : 'https://via.placeholder.com/300x450?text=No+Image';
+        }
+
+        postsHTML += `
+          <div class="movie-card">
+            <a href="${url}" title="${title}" target="_blank" rel="noopener noreferrer">
+              <div class="poster">
+                <img src="${imgUrl}" alt="${title}">
+                <div class="play-button">&#9658;</div>
+              </div>
+              <div class="movie-title">${title}</div>
+            </a>
+          </div>
+        `;
+      }
+      document.getElementById('movie-slider').innerHTML = postsHTML;
+      startMovieSlider();
+    }
+
+    function startMovieSlider() {
+      const slider = document.querySelector('#movie-slider');
+      let scrollAmount = 0;
+      const slideStep = 1;
+      const slideSpeed = 15;
+      const resetDelay = 2000;
+
+      function autoSlide() {
+        scrollAmount += slideStep;
+        if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+          scrollAmount = 0;
+          slider.scrollTo({ left: 0, behavior: 'auto' });
+          setTimeout(autoSlide, resetDelay);
+        } else {
+          slider.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+          setTimeout(autoSlide, slideSpeed);
+        }
+      }
+      autoSlide();
+    }
+  </script>
+  <script src="https://www.paypalads.com/feeds/posts/default/-/movies1000?alt=json-in-script&callback=renderMovieSlider&max-results=1000"></script>
+
+  <!-- 🧠 Video Ad Logic -->
+  <script>
+    const adOverlay = document.getElementById("adOverlay");
+    const skipBtn = document.getElementById("skipBtn");
+    const mainVideo = document.getElementById("mainVideo");
+
+    function showAd() {
+      let secondsLeft = 5;
+      adOverlay.style.display = "flex";
+      mainVideo.pause();
+
+      skipBtn.disabled = true;
+      skipBtn.classList.remove("enabled");
+      skipBtn.textContent = `Skip in ${secondsLeft}...`;
+
+      let countdown = setInterval(() => {
+        secondsLeft--;
+        if (secondsLeft > 0) {
+          skipBtn.textContent = `Skip in ${secondsLeft}...`;
+        } else {
+          clearInterval(countdown);
+          skipBtn.textContent = "Skip Ad";
+          skipBtn.disabled = false;
+          skipBtn.classList.add("enabled");
+        }
+      }, 1000);
+
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.warn("AdSense error:", e);
+      }
+    }
+
+    skipBtn.addEventListener("click", () => {
+      if (!skipBtn.disabled) {
+        adOverlay.style.display = "none";
+        mainVideo.play();
+      }
+    });
+
+    window.onload = showAd;
+    mainVideo.addEventListener("play", () => {
+      if (mainVideo.currentTime === 0) {
+        showAd();
+      }
+    });
+    mainVideo.addEventListener("ended", () => {
+      mainVideo.currentTime = 0;
+      showAd();
     });
   </script>
-
- <!-- Ad Section -->
-  <div style="width: 100%; height: 10px; background-color: orange; margin: 10px 0;"></div>
-
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-2269884583846743"
-       data-ad-slot="3828853509"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script type="af06e34e3ff1722d01e1abe4-text/javascript">
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-
-  <div style="width: 100%; height: 10px; background-color: green; margin: 10px 0;"></div>
-
-
-<!-- Movie Auto-Slider Grid -->
-<div class="movie-slider-wrapper">
-  <div id="movie-slider" class="movie-slider"></div>
-</div>
-
-<script type="af06e34e3ff1722d01e1abe4-text/javascript">
-  function renderMovieSlider(json) {
-    var postsHTML = '';
-    var maxPosts = 10;
-    for (var i = 0; i < Math.min(json.feed.entry.length, maxPosts); i++) {
-      var entry = json.feed.entry[i];
-      var title = entry.title.$t;
-      var url = '';
-      for (var j = 0; j < entry.link.length; j++) {
-        if (entry.link[j].rel === 'alternate') {
-          url = entry.link[j].href;
-          break;
-        }
-      }
-
-      var imgUrl = '';
-      if (entry.media$thumbnail) {
-        imgUrl = entry.media$thumbnail.url.replace('/s72-c/', '/s640/');
-      } else {
-        var content = entry.content.$t;
-        var imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-        imgUrl = imgMatch && imgMatch[1] ? imgMatch[1] : 'https://via.placeholder.com/300x450?text=No+Image';
-      }
-
-      postsHTML += `
-        <div class="movie-card">
-          <a href="${url}" title="${title}" target="_blank" rel="noopener noreferrer">
-            <div class="poster">
-              <img src="${imgUrl}" alt="${title}">
-              <div class="play-button">&#9658;</div>
-            </div>
-            <div class="movie-title">${title}</div>
-          </a>
-        </div>
-      `;
-    }
-    document.getElementById('movie-slider').innerHTML = postsHTML;
-    startMovieSlider();
-  }
-
-  function startMovieSlider() {
-    const slider = document.querySelector('#movie-slider');
-    let scrollAmount = 0;
-    const slideStep = 1; // pixels per frame
-    const slideSpeed = 15; // lower = faster
-    const resetDelay = 2000;
-
-    function autoSlide() {
-      scrollAmount += slideStep;
-      if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
-        scrollAmount = 0;
-        slider.scrollTo({ left: 0, behavior: 'auto' });
-        setTimeout(autoSlide, resetDelay);
-      } else {
-        slider.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-        setTimeout(autoSlide, slideSpeed);
-      }
-    }
-
-    autoSlide();
-  }
-</script>
-
-<!-- Blogger JSON Feed for label "mobland", showing 10 posts -->
-<script src="https://www.paypalads.com/feeds/posts/default/-/movies1000?alt=json-in-script&callback=renderMovieSlider&max-results=100" type="af06e34e3ff1722d01e1abe4-text/javascript"></script>
-
-<style>
-  .movie-slider-wrapper {
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 20px 0;
-  }
-
-  .movie-slider {
-    display: flex;
-    gap: 20px;
-    padding: 10px 30px;
-  }
-
-  .movie-card {
-    min-width: 180px;
-    max-width: 180px;
-    background: #111;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
-  }
-
-  .movie-card:hover {
-    transform: scale(1.05);
-  }
-
-  .poster {
-    position: relative;
-    aspect-ratio: 2/3;
-    overflow: hidden;
-  }
-
-  .movie-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: 0.3s ease;
-  }
-
-  .movie-card:hover img {
-    filter: brightness(0.5);
-    transform: scale(1.05);
-  }
-
-  .play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 50px;
-    color: white;
-    background: rgba(229, 9, 20, 0.9);
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    text-align: center;
-    line-height: 70px;
-    box-shadow: 0 0 20px #e50914;
-    pointer-events: none;
-  }
-
-  .movie-title {
-    text-align: center;
-    background: #e50914;
-    color: white;
-    padding: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: capitalize;
-  }
-
-  @media (max-width: 600px) {
-    .movie-card {
-      min-width: 130px;
-      max-width: 130px;
-    }
-
-    .play-button {
-      font-size: 36px;
-      width: 55px;
-      height: 55px;
-      line-height: 55px;
-    }
-
-    .movie-title {
-      font-size: 13px;
-      padding: 8px;
-    }
-
-    .movie-slider {
-      gap: 14px;
-      padding: 10px 20px;
-    }
-  }
-</style>
-
-<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="af06e34e3ff1722d01e1abe4-|49" defer></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979dcdb68c3376fc',t:'MTc1Njk5MjIyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"979dcdb68c3376fc","version":"2025.8.0","r":1,"token":"4c2de9bc788e471facac84a0b42a7ee6","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
 </body>
-
-</script></span></b></span></strong></div><ul class="wp-block-list"><li style="text-align: center;"><a href="https://www.paypalads.com/search/label/movies1000" style="font-size: large;" target="_blank">Search</a><span style="font-size: large;">&nbsp;|&nbsp;</span><a href="https://www.paypalads.com/p/contact-us.html" style="font-size: large;" target="_blank">Contact US</a></li><li style="text-align: center;"><span style="font-size: medium;"><a href="https://www.paypalads.com/p/privacy-policy.html" target="_blank">Privacy policy</a>&nbsp;|&nbsp;<a href="https://www.paypalads.com/p/affiliate-marketing-and-adsense.html" target="_blank">Disclosure</a></span></li><span style="font-size: medium;"><!--/wp:list-item--><!--wp:list-item-->
-<!--/wp:list-item-->
-
-<!--wp:list-item-->
-</span><li style="text-align: center;"><a href="https://www.paypalads.com/p/terms-and-conditions.html" target="_blank"><span style="font-size: medium;">Terms and Conditions</span></a></li>
-<!--/wp:list-item--></ul>
-<!--/wp:list-->
-
-<p></p>
- </section></main>
-
-</section>
-  </main>
 </html>
