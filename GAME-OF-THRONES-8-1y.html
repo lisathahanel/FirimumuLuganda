@@ -11,10 +11,10 @@
  
   <meta charset="UTF-8"></meta>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
-  <title>Seasons 8 Game of Thrones by vj ulio translated movie</title>
+  <title>VJ Junio - Army of Thieves translated movie</title>
 
   <!--SEO Meta Description-->
-  <meta content="Game of Thrones Seasons 8 Enjogerere episode 1 translated by vj ulio Watch and Download full Movie translated by vj ulio #Kagujje #uganda" name="description"></meta>
+  <meta content="Army of Thieves Enjogerere translated by vj Junio Watch and Download full Movie translated by vj ulio #Kagujje #uganda" name="description"></meta>
 
   <!--Robots-->
   <meta content="index, follow" name="robots"></meta>
@@ -101,7 +101,112 @@
     }
   </style>
 
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="500" referrerpolicy="strict-origin-when-cross-origin" src="https://myads.shop/wp-content/uploads/2025/09/GAME-OF-THRONES-8-1s.mp4" title="YouTube video player" width="100%"></iframe>
+<div class="video-wrapper" style="position:relative; max-width:900px; margin:0 auto;">
+  <!-- 🎬 Video Player -->
+  <video id="myVideo" controls autoplay playsinline width="100%">
+    <source src="https://myads.shop/wp-content/uploads/2025/09/GAME-OF-THRONES-8-1s.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- 🟡 Overlay Ad -->
+  <div class="overlay-ad" id="overlayAd">
+    <div class="ad-header" id="adHeader" onclick="toggleAd()">▲ Hide Ad</div>
+    <div class="ad-body">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-2269884583846743"
+           data-ad-slot="2115767840"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+</div>
+
+<style>
+.overlay-ad {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 728px;
+  z-index: 10;
+  background: rgba(0,0,0,0.7);
+  border-radius: 6px;
+  overflow: hidden;
+  color: #fff;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+.overlay-ad.sticky {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  left: auto;
+  transform: none;
+  width: 300px;
+  max-width: 300px;
+  background: rgba(0,0,0,0.5); /* semi-transparent when sticky */
+}
+.overlay-ad .ad-header {
+  background: #e50914;
+  color: #fff;
+  padding: 4px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+.overlay-ad .ad-body {
+  display: block;
+  padding: 5px;
+  background: #111;
+}
+.overlay-ad.minimized .ad-body {
+  display: none;
+}
+</style>
+
+<script>
+function toggleAd() {
+  const adBox = document.getElementById("overlayAd");
+  const adHeader = document.getElementById("adHeader");
+
+  adBox.classList.toggle("minimized");
+  adBox.classList.toggle("sticky");
+
+  adHeader.textContent = adBox.classList.contains("minimized") ? "▼ Show Ad" : "▲ Hide Ad";
+}
+
+// Auto-minimize after 15 seconds on page load
+window.addEventListener("load", function() {
+  setTimeout(minimizeAd, 15000); // 15 seconds
+});
+
+// Function to minimize the ad
+function minimizeAd() {
+  const adBox = document.getElementById("overlayAd");
+  const adHeader = document.getElementById("adHeader");
+  adBox.classList.add("minimized");
+  adBox.classList.add("sticky");
+  adHeader.textContent = "▼ Show Ad";
+}
+
+// Auto-expand every 15 minutes (900,000 ms)
+setInterval(() => {
+  const adBox = document.getElementById("overlayAd");
+  const adHeader = document.getElementById("adHeader");
+
+  // Expand the ad
+  adBox.classList.remove("minimized");
+  adBox.classList.remove("sticky");
+  adHeader.textContent = "▲ Hide Ad";
+
+  // Then auto-minimize after 15 seconds
+  setTimeout(minimizeAd, 15000);
+}, 900000); // 15 minutes
+</script>
+
 
   <!-- Ad Section -->
   <div style="width: 100%; height: 10px; background-color: orange; margin: 10px 0;"></div>
