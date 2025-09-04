@@ -1,0 +1,3210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap">
+    <title>Fresh Teacher's Video Library</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+ .scroll-to-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+
+        .card {
+        transition: transform 0.3s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items horizontally */
+        text-align: center; /* Center text content */
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .container.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Style for the video element within the video modal */
+#videoPlayer {
+    max-width: 100%;
+    height: auto;
+}
+.header-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            color: skyblue;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <h1 class="header-title"><strong>FRESH  TEACHER'S  VIDE▶️  LIBRARY</strong></h1>
+            <form class="form-inline ml-auto">
+                <input class="form-control mr-sm-2" type="search" id="searchInput" placeholder="Search for Movies..." aria-label="Search">
+            </form>
+        </div>
+    </nav><br><br><br>
+
+    <div class="container mt-5">
+        <div class="row" id="movie-list">
+            <!-- Movie cards will be populated here by JavaScript -->
+        </div>
+        <div class="container text-center mt-3">
+            <button id="prev-page" class="btn btn-primary">Previous</button>
+            <span id="page-info" class="mx-3"></span>
+            <button id="next-page" class="btn btn-primary">Next</button>
+        </div>          
+     </div><br><br>
+
+    <div class="modal fade" id="movieModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Video Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 id="modal-movie-title"></h6>
+                    <div class="btn-group mb-3" id="modal-season-buttons">
+                        <!-- Season buttons will be populated here by JavaScript -->
+                    </div>
+                    <ul class="list-group" id="modal-episode-list">
+                        <!-- Episode links will be populated here by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Video Player</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <video id="videoPlayer" controls autoplay style="width: 100%;">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div> 
+        </div>
+    </div>    
+    
+    
+
+    <div class="scroll-to-top"> 🔝 </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+ const seriesData = [
+
+
+ {
+        "title": "Squid Game",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Squid%20Game/Squid%20Game%201%20by%20Vj%20Junior.mp4&eps_id=42231" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 9
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "Squid20Game202021.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Zootopia",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Zootopia/Zootopia%201%20by%20Vj%20Kevo.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Kevo",
+            "thumbnail": "Zootopia.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Pacific",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Pacific/The%20Pacific%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "The20Pacific202010.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Zatima",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Zatima/Zatima%201%20by%20Vj%20Kimuli.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 10
+                }
+                
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Zatima202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Transporter",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Transporter/The%20Transporter%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "The20Transporter.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Yemin",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Yemin/Yemin%201%20by%20Vj%20Mox.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 42
+                }
+            ],
+            "vjName": "Vj Mox",
+            "thumbnail": "Yemin.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "You Are My Destiny",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/You%20Are%20My%20Destiny/You%20Are%20My%20Destiny%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 32
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "You20Are20My20Destiny202020.jpgh380w250atzc1.jpg"
+      },
+    
+      {
+        "title": "Van Helsing",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Van%20Helsing/Van%20Helsing%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 13
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 13
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 2
+                }
+                
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Van-Helsing-2016.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Vengeance of the Bride",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Vengeance%20of%20the%20Bride/Vengeance%20of%20the%20Bride%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 61
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Vengeance20of20the20Bride202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Vidrohi",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Vidrohi/Vidrohi%201%20by%20Vj%20Dan%20De.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Dan De",
+            "thumbnail": "Vidrohi202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "War of the Worlds",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/War%20of%20the%20Worlds/War%20of%20the%20Worlds%201%20by%20Vj%20Jimmy.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 8
+                }
+                
+            ],
+            "vjName": "Vj Jimmy",
+            "thumbnail": "War20of20the20Worlds202019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Wayward Pines",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Wayward%20Pines/Wayward%20Pines%201%20by%20Vj%20Tom.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Tom",
+            "thumbnail": "Wayward20Pines202015.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Wednesday",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Wednesday/Wednesday%201%20by%20Vj%20Ulio.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Ulio",
+            "thumbnail": "Wednesday2022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "What Happens to My Family?",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/What%20Happens%20to%20My%20Family/What%20Happens%20to%20My%20Family-%201%20by%20Monks.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 44
+                }
+            ],
+            "vjName": "Monks",
+            "thumbnail": "What20Happens20to20My20Family.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Whats Wrong with Secretary Kim",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Whats%20Wrong%20with%20Secretary%20Kim/Whats%20Wrong%20with%20Secretary%20Kim%201%20by%20Vj%20Hd.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Hd",
+            "thumbnail": "Whats20Wrong20with20Secretary20Kim.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Wolf Pack",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Wolf%20Pack/Wolf%20Pack%201%20by%20Vj%20Isma%20K.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Isma K",
+            "thumbnail": "WolfPack.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Wolves in War",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Wolves%20in%20War/Wolves%20in%20War%201%20by%20Vj%20Muba.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj Muba",
+            "thumbnail": "Wolves20in20War202018.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Women at War",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Women%20at%20War/Women%20at%20War%201%20by%20Vj%20Kimuli.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Women20at20War202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Woman of 9.9 Billion",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/WomanOf9.9Billion/Woman%20of%209.9%20Billion%201%20by%20Vj%20Hd.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 32
+                }
+            ],
+            "vjName": "Vj Hd",
+            "thumbnail": "Woman20of209.920Billion202019-.jpgh380w250atzc1.jpg"
+      },
+    
+      {
+        "title": "Wulin Heroes",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Wulin%20Heroes/Wulin%20Heroes%201%20by%20Vj%20Kam.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Kam",
+            "thumbnail": "Wulin-Heroes-2023.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "The Ugly Queen",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Ugly%20Queen/The%20Ugly%20Queen%201%20by%20Vj%20Khan%20Li.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Khan Li",
+            "thumbnail": "The20Ugly20Queen202018.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Veil",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Veil/The%20Veil%201%20by%20Vj%20Hd.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 23
+                }
+            ],
+            "vjName": "Vj Hd",
+            "thumbnail": "The20Veil202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Thousand Fangs",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Thousand%20Fangs/Thousand%20Fangs%201%20by%20Vj%20Kevin.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 7
+                }
+            ],
+            "vjName": "Vj Kevin",
+            "thumbnail": "Thousand20Fangs.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Three Days",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Three%20Days/Three%20Days%201%20by%20Vj%20Hd.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Hd",
+            "thumbnail": "Three20Days.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Time Between Dog and Wolf",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Time%20Between%20Dog%20and%20Wolf/Time%20Between%20Dog%20and%20Wolf%201%20by%20Vj%20Hd.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Hd",
+            "thumbnail": "Time20Between20Dog20and20Wolf202006.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Tornado Girl",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Tornado%20Girl/Tornado%20Girl%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 60
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "Tornado20Girl.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Trolley",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Trolley/Trolley%201%20by%20Vj%20Fredy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Fredy",
+            "thumbnail": "Trolley202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Trot Lovers",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Trot%20Lovers/Trot%20Lovers%201%20by%20Vj%20Eddy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Eddy",
+            "thumbnail": "Trot20Lovers202014.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Tulsa King",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Tulsa%20King/Tulsa%20King%201%20by%20Vj%20Ice%20P.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 9
+                }
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "Tulsa-King-2022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Tunnel",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Tunnel/Tunnel%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "Tunnel202017.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Twelve Legends",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Twelve%20Legends/Twelve%20Legends%201%20by%20Vj%20Baros.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 23
+                }
+            ],
+            "vjName": "Vj Baros",
+            "thumbnail": "Twelve20Legends202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Unmatched Hero Fang Shiyu",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Unmatched%20Hero%20Fang%20Shiyu/Unmatched%20Hero%20Fang%20Shiyu%201%20by%20Vj%20Muba.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 15
+                }
+            ],
+            "vjName": "Vj Muba",
+            "thumbnail": "Unmatched20Hero20Fang20Shiyu202011.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "V",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/V/V%201%20by%20Vj%20Tom.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 13
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 9
+                }
+                
+            ],
+            "vjName": "Vj Tom",
+            "thumbnail": "V2009.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "The Stand",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Stand/The%20Stand%201%20by%20Vj%20Kevin.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 9
+                }
+            ],
+            "vjName": "Vj Kevin",
+            "thumbnail": "The20stand2021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Storm of the World",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Storm%20of%20the%20World/The%20Storm%20of%20the%20World%201%20by%20Vj%20Ice%20P.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 35
+                }
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "The20Storm20of20the20World.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Strain",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Strain/The%20Strain%201%20by%20Vj%20Aaron.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 13
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 13
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 10
+                },
+                {
+                    "seasonNumber": 4,
+                    "episodeCount": 8
+                }
+                
+            ],
+            "vjName": "Vj Aaron",
+            "thumbnail": "The20Strain202014.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Terminal List",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Terminal%20List/The%20Terminal%20List%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "The20Terminal20List.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Thunder",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Thunder/The%20Thunder%201%20by%20Vj%20Muba.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 15
+                }
+            ],
+            "vjName": "Vj Muba",
+            "thumbnail": "The20Thunder202019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Tomorrow People",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Tomorrow%20People/The%20Tomorrow%20People%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "The20Tomorrow20People.jpgh380w250atzc1.jpg"
+      },
+    
+      {
+        "title": "The Tudors",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Tudors/The%20Tudors%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 10
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 8
+                },
+                {
+                    "seasonNumber": 4,
+                    "episodeCount": 7
+                }
+                
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "The20Tudors202007.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Queens Gambit",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Queens%20Gambit/The%20Queens%20Gambit%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 9
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "The20Queens20Gambit202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Righteous Fists",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Righteous%20Fists/The%20Righteous%20Fists%201%20by%20Vj%20Sammy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj Sammy",
+            "thumbnail": "The20Righteous20Fists202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Secret Agent",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Secret%20Agent/The%20Secret%20Agent%201%20by%20Vj%20Ice%20P.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 4
+                }
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "The20Secret20Agent20201620.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Shaw Eleven Lang",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Shaw%20Eleven%20Lang/The%20Shaw%20Eleven%20Lang%201%20by%20Vj%20Ice%20P.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 30
+                }
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "The20Shaw20Eleven20Lang202016.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Sound of Magic",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Sound%20of%20Magic/The%20Sound%20of%20Magic%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "The20Sound20of20Magic.jpgh380w250atzc1.jpg"
+      },
+    
+      {
+        "title": "The Patient",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Patient/The%20Patient%201%20by%20Vj%20Kimuli.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "The20Patient202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Glory",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Glory/The%20Glory%201%20by%20Vj%20Baros.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Baros",
+            "thumbnail": "The20Glory202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Great",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Great/The%20Great%201%20by%20Vj%20Kimuli.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "The20Great202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The House of Flowers",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20House%20of%20Flowers/The%20House%20of%20Flowers%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [ 
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 13
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "The20House20of20Flowers202018.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Imperial Coroner",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Imperial%20Coroner/The%20Imperial%20Coroner%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 36
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "The20Imperial20Coroner202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Ingenious One",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Ingenious%20One/The%20Ingenious%20One%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 36
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "The20Ingenious20One.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Killer Bride",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Killer%20Bride/The%20Killer%20Bride%201%20by%20Vj%20Kevin.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj Kevin",
+            "thumbnail": "The20Killer20Bride202019_files.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Kingdom of the Winds",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Kingdom%20of%20the%20Winds/The%20Kingdom%20of%20the%20Winds%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 26
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "The20Kingdom20of20the20Winds.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Kings Affection",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Kings%20Affection/The%20Kings%20Affection%201%20by%20Vj%20Little%20T.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 18
+                }
+            ],
+            "vjName": "Vj Little T",
+            "thumbnail": "The20Kings20Affection.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Legend of Bruce Lee",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Legend%20of%20Bruce%20Lee/The%20Legend%20of%20Bruce%20Lee%201%20by%20Vj%20Khan%20Li.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Khan Li",
+            "thumbnail": "The20Legend20of20Bruce20Lee.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Longest Night",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Longest%20Night/The%20Longest%20Night%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "The20Longest20Night202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Lost Symbol",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Lost%20Symbol/The%20Lost%20Symbol%201%20by%20Vj%20Kevin.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Kevin",
+            "thumbnail": "The20lost20symbol.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Love Equations",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Love%20Equations/The%20Love%20Equations%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 22
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "The20Love20Equations202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Morning Show",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Morning%20Show/The%20Morning%20Show%201%20by%20Vj%20Ulio.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Ulio",
+            "thumbnail": "The20Morning20Show202019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Night Agent",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Night%20Agent/The%20Night%20Agent%201%20by%20Vj%20Tom.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Tom",
+            "thumbnail": "The20Night20Agent.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Order",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Order/The%20Order%201%20by%20Vj%20Kin.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 21
+                }
+            ],
+            "vjName": "Vj Kin",
+            "thumbnail": "The20Order202019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Originals",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Originals/The%20Originals%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "The20Originals202013.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "The Brave",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Brave/The%20Brave%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "The20Brave202017-2018.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Brave",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/thebrave/The%20Brave_01_1.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "",
+            "thumbnail": "The20Brave202017.jpgh380w250atzc1.jpg"
+      },
+    
+      {
+        "title": "The Chosen One",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Chosen%20One/The%20Chosen%20One%201%20by%20Vj%20Aron.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 3
+                }
+            ],
+            "vjName": "Vj Aron",
+            "thumbnail": "The20Chosen20One202019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Defenders",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Defenders/The%20Defenders%201%20by%20Vj%20Tom.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Tom",
+            "thumbnail": "The20Defenders202017.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Devil Judge",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Devil%20Judge/The%20Devil%20Judge%201%20by%20Vj%20Ivo.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 15
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "The20Devil20Judge202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Diplomat",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Diplomat/The%20Diplomat%201%20by%20Vj%20Kimuli.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 3
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "The20Diplomat202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Dropout",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Dropout/The%20Dropout%201%20by%20Vj%20Ulio.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Ulio",
+            "thumbnail": "The20Dropout202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Empire",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Empire/The%20Empire%201%20by%20Vj%20Muba.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 11
+                }
+            ],
+            "vjName": "Vj Muba",
+            "thumbnail": "The20Empire202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Empress",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Empress/The%20Empress%201%20by%20Vj%20Jimmy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Jimmy",
+            "thumbnail": "The20Empress.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Endgame",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Endgame/The%20Endgame%201%20by%20Vj%20Jimmy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Jimmy",
+            "thumbnail": "The20Endgame202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Event",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Event/The%20Event%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 22
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "The20Event202010.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Forbidden Marriage",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Forbidden%20Marriage/The%20Forbidden%20Marriage%201%20by%20Vj%20Little%20T.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 23
+                }
+            ],
+            "vjName": "Vj Little T",
+            "thumbnail": "The20Forbidden20Marriage202022.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "The Hobbit",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Hobbit/The%20Hobbit%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "The-Hobbit.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Taxi Driver",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Taxi%20Driver/Taxi%20Driver%201%20by%20Vj%20Fredy.mp4&eps_id=43039" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 24
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 8
+                }
+                
+            ],
+            "vjName": "Vj Fredy",
+            "thumbnail": "Taxi-Driver-2021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Tears in Heaven",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Tears%20in%20Heaven/Tears%20in%20Heaven%201%20by%20Vj%20Eddy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 43
+                }
+            ],
+            "vjName": "Vj Eddy",
+            "thumbnail": "Tears20in20Heaven.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Lincoln Lawyer",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Lincoln%20Lawyer/The%20Lincoln%20Lawyer%201%20by%20Vj%20Kimuli.mp4&eps_id=43173" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "The-Lincoln-Lawyer-2022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Long Ballad",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Long%20Ballad/The%20Long%20Ballad%201%20by%20Vj%20Ice%20P.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 49
+                }
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "The-Long-Ballad.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Mandalorian",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Mandalorian/The%20Mandalorian%201%20by%20Vj%20Aaron.mp4&eps_id=42475" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Aaron",
+            "thumbnail": "The-Mandalorian-2019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Secret Romantic Guesthouse",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Secret%20Romantic%20Guesthouse/The%20Secret%20Romantic%20Guesthouse%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 18
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "The-Secret-Romantic-Guestho.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Tourist",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Tourist/The%20Tourist%201%20by%20Vj%20Muba.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Muba",
+            "thumbnail": "The-Tourist.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Walking Dead",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Walking%20Dead/The%20Walking%20Dead%201%20by%20Vj%20Jimmy.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 129
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 13
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 4,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 5,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 6,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 7,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 8,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 9,
+                    "episodeCount": 14
+                }
+                
+            ],
+            "vjName": "Vj Jimmy",
+            "thumbnail": "The-Walking-Dead-2010.jpgh380w250atzc1.jpg"
+      },
+    
+    
+      {
+        "title": "Stargirl",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Stargirl/Stargirl%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 13
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Stargirl202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Strangers Again",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Strangers%20Again/Strangers%20Again%201%20by%20Vj%20Baros.mp4&eps_id=42245" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Baros",
+            "thumbnail": "Strangers20Again202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Super Star Academy",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Super%20Star%20Academy/Super%20Star%20Academy%201%20by%20Vj%20Eddy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 30
+                }
+            ],
+            "vjName": "Vj Eddy",
+            "thumbnail": "Super20Star20Academy.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Queen Cleopatra",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Queen%20Cleopatra/Queen%20Cleopatra%201%20by%20Vj%20Kimuli.mp4&eps_id=42900" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 4
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Queen20Cleopatra202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Queen of Ambition",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Queen%20of%20Ambition/Queen%20of%20Ambition%201%20by%20Vj%20Hd.mp4&eps_id=41010" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 24
+                }
+                
+            ],
+            "vjName": "Vj Hd",
+            "thumbnail": "Queen20of20Ambition202013.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Queenmaker",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Queenmaker/Queenmaker%201%20by%20Vj%20KS.mp4&eps_id=42831" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 11
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Queenmaker202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Raised by Wolves",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Raised%20by%20Wolves/Raised%20by%20Wolves%201%20by%20Vj%20Emmy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Emmy",
+            "thumbnail": "Raised20by20Wolves202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Reasonable Doubt",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Reasonable%20Doubt/Reasonable%20Doubt%201%20by%20Vj%20Kimuli.mp4&eps_id=41574" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 9
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Reasonable20Doubt20202.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Relic of an Emissary",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Relic%20of%20an%20Emissary/Relic%20of%20an%20Emissary%201%20by%20Vj%20Muba.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 40
+                }
+            ],
+            "vjName": "Vj Muba",
+            "thumbnail": "relic-of-emissary.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Return Man",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Return%20Man/Return%20Man%201%20by%20Vj%20Lance.mp4&eps_id=42332" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Return20Man202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Revenge of Others",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Revenge%20of%20Others/Revenge%20of%20Others%201%20by%20Vj%20Baros.mp4&eps_id=41728" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Baros",
+            "thumbnail": "Revenge20of20Others202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Riches",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Riches/Riches%201%20by%20Vj%20Kimuli.mp4&eps_id=41698" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Riches202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Romulus",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Romulus/Romulus%201%20by%20Vj%20Kimuli.mp4&eps_id=42231" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Romulus202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Saying Goodbye",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Saying%20Goodbye/Saying%20Goodbye%201%20by%20Vj%20Ivo.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "Saying20Goodbye202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Scandal",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Scandal/Scandal%207%20by%20Vj%20Kimuli.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 13
+                },
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+                
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Scandal-2012.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Secret Garden",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Secret%20Garden/Secret%20Garden%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 19
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "Secret20Garden20201.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Secret Love",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Secret%20Love/Secret%20Love%201%20by%20Vj%20Little%20T.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Little T",
+            "thumbnail": "Secret20Love.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Shanty Town",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Shanty%20Town/Shanty%20Town%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Shanty20Town202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Silo",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Silo/Silo%201%20by%20Vj%20Junior.mp4&eps_id=42942" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "Silo202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Snowpiercer",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Snowpiercer/Snowpiercer%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 8
+                }
+                
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "Snowpiercer202020-.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Sponsor",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Sponsor/Sponsor%201%20by%20Vj%20Eddy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Eddy",
+            "thumbnail": "Sponsor2022.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Lucifer",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Lucifer/Lucifer%201%20by%20Vj%20Jimmy.mp4&eps_id=41285" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 35
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 18
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 4
+                }
+                
+            ],
+            "vjName": "Vj Jimmy",
+            "thumbnail": "Lucifer202016.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Manifest",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Manifest/Manifest%201%20by%20Vj%20Tom.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Tom",
+            "thumbnail": "Manifest202018.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Kung Fu Cop",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Kung%20Fu%20Cop/Kung%20Fu%20Cop%202%20by%20Vj%20Banks.mp4&eps_id=42592" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj Banks",
+            "thumbnail": "Kung20Fu20Cop202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "My Dear Guardian",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/My%20Dear%20Guardian/My%20Dear%20Guardian%201%20by%20Vj%20Sammy.mp4&eps_id=37433" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 31
+                }
+            ],
+            "vjName": "Vj Sammy",
+            "thumbnail": "My20Dear20Guardian.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "My Heroic Husband",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/My%20Heroic%20Husband/My%20Heroic%20Husband%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 24
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "My20Heroic20Husband202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "My Natasha",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/My%20Natasha/My%20Natasha%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "My20Natasha202012.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Narco Saints",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Narco%20Saints/Narco%20Saints%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Narco20Saints202019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Natural Born Narco",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Natural%20Born%20Narco/Natural%20Born%20Narco%201%20by%20Vj%20Kimuli.mp4&eps_id=42428" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 5
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Natural-Born-Narco-2022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Never Have I Ever",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Never%20Have%20I%20Ever/Never%20Have%20I%20Ever%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "Never-Have-I-Ever-2020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "No Secrets",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/No%20Secrets/No%20Secrets%201%20by%20Vj%20Eddy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 30
+                }
+            ],
+            "vjName": "Vj Eddy",
+            "thumbnail": "No20Secrets202015.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Oasis",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Oasis/Oasis%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 17
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Oasis202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "October Road",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/October%20Road/October%20Road%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "October20Road202007.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "One Tree Hill",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/One%20Tree%20Hill/One%20Tree%20Hill%201%20by%20Mox.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 22
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 23
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Mox",
+            "thumbnail": "One-Tree-Hill-2003.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Our Blooming Youth",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Our%20Blooming%20Youth/Our%20Blooming%20Youth%201%20by%20Vj%20Kam.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 24
+                }
+            ],
+            "vjName": "Vj Kam",
+            "thumbnail": "Our20Blooming20Youth202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Peacemaker",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Peacemaker/Peacemaker%201%20by%20Vj%20Jimmy.mp4&eps_id=40275" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 7
+                }
+            ],
+            "vjName": "Vj Jimmy",
+            "thumbnail": "Peacemaker202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Peaky Blinders",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Peaky%20Blinders/Peaky%20Blinders%201%20by%20Vj%20Ulio.mp4&eps_id=42783" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 6
+                }
+                
+            ],
+            "vjName": "Vj Ulio",
+            "thumbnail": "Peaky20Blinders202013.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Pennyworth",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Pennyworth/Pennyworth%201%20by%20Vj%20Jimmy.mp4&eps_id=41179" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 30
+                },
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                },
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+                
+            ],
+            "vjName": "Vj Jimmy",
+            "thumbnail": "Pennyworth202019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Pied Piper",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Pied%20Piper/Pied%20Piper%201%20by%20Vj%20Hd.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Hd",
+            "thumbnail": "Pied20Piper202016.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Pink Lipstick",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Pink%20Lipstick/Pink%20Lipstick%201%20by%20Vj%20Sammy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 43
+                }
+            ],
+            "vjName": "Vj Sammy",
+            "thumbnail": "Pink20Lipstick202010.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Player",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Player/The%20Player%201%20by%20Vj%20Hd.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 14
+                }
+            ],
+            "vjName": "Vj Hd",
+            "thumbnail": "Player202018.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Pride and Prejudice",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Pride%20and%20Prejudice/Pride%20and%20Prejudice%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 21
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Pride_and_Prejudice_Korean_Drama-p1.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Princess Jieyou",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Princess%20Jieyou/Princess%20Jieyou%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 7
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "Princess20Jieyou202016.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Immortal Samsara",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Immortal%20Samsara/Immortal%20Samsara%201%20by%20Vj%20Muba.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 52
+                }
+            ],
+            "vjName": "Vj Muba",
+            "thumbnail": "Immortal20Samsara202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Innocent Lies",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Innocent%20Lies/Innocent%20Lies%201%20by%20Vj%20Lance.mp4&eps_id=41101" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 34
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Innocent20Lies202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Inside Man",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Inside%20Man/Inside%20Man%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 50
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Inside20Man202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Interview with the Vampire",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Interview%20with%20the%20Vampire/Interview%20with%20the%20Vampire%201%20by%20Vj%20Kimuli.mp4&eps_id=40826" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 7
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Interview20with20the20Vampire202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Iron Fist",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Iron%20Fist/Iron%20Fist%201%20by%20Vj%20Jingo.mp4&eps_id=40016" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 23
+                }
+            ],
+            "vjName": "Vj Jingo",
+            "thumbnail": "Iron20Fist202017.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Island",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Island%20Part%202/Island%20Part%202-%20Episode%201%20by%20Vj%20Ivo.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "Island20Part202.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Island",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Island%20Part%202/Island%20Part%202-%20Episode%201%20by%20Vj%20Ivo.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "Island202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Invasion",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Invasion/Invasion%201%20by%20Vj%20Kevin.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Kevin",
+            "thumbnail": "Invasion202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Joseon Survival",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Joseon%20Survival/Joseon%20Survival%201%20by%20Vj%20waza.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj waza",
+            "thumbnail": "Joseon-Survival-2019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Justice Served",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Justice%20Served/Justice%20Served%201%20by%20Vj%20Kimuli.mp4&eps_id=42187" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Justice20Served202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Kingdom",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Kingdom/Kingdom%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 12
+                } 
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "Kingdom202019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Kings",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Kings/Kings%201%20by%20Vj%20Junior.mp4&eps_id=29606" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 11
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "Kings202009.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Kunlun Tomb",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Kunlun%20Tomb/Kunlun%20Tomb%201%20by%20Vj%20Baros.mp4&eps_id=40994" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Baros",
+            "thumbnail": "Kunlun20Tomb202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "La Brea",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/La%20Brea/La%20Brea%201%20by%20Vj%20Jimmy.mp4&eps_id=41169" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Jimmy",
+            "thumbnail": "La20Brea202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Last Resort",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Last%20Resort/Last%20Resort%201%20by%20Vj%20Tom.mp4&eps_id=42656" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 13
+                }
+            ],
+            "vjName": "Vj Tom",
+            "thumbnail": "Last20Resort202012.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Legacies",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Legacies/Legacies%201%20by%20Vj%20Jimmy.mp4&eps_id=40897" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 4,
+                    "episodeCount": 20
+                }
+                
+            ],
+            "vjName": "Vj Jimmy",
+            "thumbnail": "Legacies202018.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Legend of the Seeker",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Legend%20of%20the%20Seeker/Legend%20of%20the%20Seeker%201%20by%20Vj%20Tom.mp4&eps_id=43164" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 21
+                }
+            ],
+            "vjName": "Vj Tom",
+            "thumbnail": "Legend20of20the20Seeker.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Leopard Skin",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Leopard%20Skin/Leopard%20Skin%201%20by%20Vj%20Kimuli.mp4&eps_id=42842" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Leopard20Skin202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Lost Track of Time",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Lost%20Track%20of%20Time/Lost%20Track%20of%20Time%201%20by%20Vj%20Khan%20Li.mp4&eps_id=41344" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 19
+                }
+            ],
+            "vjName": "Vj Khan Li",
+            "thumbnail": "Lost20Track20of20Time202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Love and Fortune",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Love%20and%20Fortune/Love%20and%20Fortune%201%20by%20Vj%20Ivo.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "Love20and20Fortune.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Love in Contract",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Island%20Part%202/Island%20Part%202-%20Episode%201%20by%20Vj%20Ivo.mp4&eps_id=42905" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "Love20in20Contract202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Love to the End",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Love%20to%20the%20End/Love%20to%20the%20End%201%20by%20Vj%20Sammy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 45
+                }
+            ],
+            "vjName": "Vj Sammy",
+            "thumbnail": "Love20to20the20End202018.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Fake Princess",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Fake%20Princess/Fake%20Princess%201%20by%20Vj%20Kam.mp4&eps_id=41544" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj Kam",
+            "thumbnail": "Fake20Princess202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Fauda",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Fauda/Fauda%201%20by%20Vj%20Little%20T.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Little T",
+            "thumbnail": "Fauda202015.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Fishbowl Wives",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Fishbowl%20Wives/Fishbowl%20Wives%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Fishbowl20Wives202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Flower of Evil",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Flower%20of%20Evil/Flower%20of%20Evil%201%20by%20Vj%20Ivo.mp4&eps_id=42062" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "Flower20of20Evil202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Flower of Revenge",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Flower%20of%20Revenge/Flower%20of%20Revenge%201%20by%20Vj%20Ivo.mp4&eps_id=42386" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "Flower20of20Revenge.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Flying Tiger",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Flying%20Tiger/Flying%20Tiger%201%20by%20Vj%20Sammy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 30
+                }
+            ],
+            "vjName": "Vj Sammy",
+            "thumbnail": "Flying20Tiger202018.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Forecasting Love and Weather",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Forecasting%20Love%20and%20Weather/Forecasting%20Love%20and%20Weather%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Forecasting20Love20and20Weather202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Game of Outlaws",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Game%20of%20Outlaws/Game%20of%20Outlaws%201%20by%20Vj%20Sammy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 29
+                }
+            ],
+            "vjName": "Vj Sammy",
+            "thumbnail": "Game20of20Outlaws202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Game of Witches",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Game%20of%20Witches/Game%20of%20Witches%201%20by%20Vj%20Lance.mp4&eps_id=41065" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 26
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Game20of20Witches.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Most Dangerous Game",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Most%20Dangerous%20Game/Most%20Dangerous%20Game%201%20by%20Vj%20Tom.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 15
+                }
+            ],
+            "vjName": "Vj Tom",
+            "thumbnail": "Most20Dangerous20Game202020-.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Ghost",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Ghost/Ghost%201%20by%20Vj%20Sammy.mp4&eps_id=40674" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj Sammy",
+            "thumbnail": "Ghost202012.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Godfather of Harlem",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Godfather%20of%20Harlem/Godfather%20of%20Harlem%201%20by%20Vj%20Kimuli.mp4&eps_id=42171" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 30
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 10
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Godfather20of20Harlem.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Golden Time",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Golden%20Time/Golden%20Time%201%20by%20Vj%20KS.mp4&eps_id=42299" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 23
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Golden20Time202012.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Good Doctor",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Good%20Doctor/Good%20Doctor%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Good-Doctor-2013.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Happiness",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Happiness/Happiness%201%20by%20Vj%20Ivo.mp4&eps_id=40103" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 24
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "Happiness1.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Harpers Island",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Harpers%20Island/Harpers%20Island%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 7
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "Harpers20Island.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Hawkeye",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Hawkeye/Hawkeye%201%20by%20Vj%20Ice%20P.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "Hawkeye202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Her Legend",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Her%20Legend/Her%20Legend%201%20by%20Vj%20KS.mp4&eps_id=41881" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Her20Legend202013.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Heroes",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Heroes/Heroes%201%20by%20Vj%20Ice%20P.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 44
+                }
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "heroesposter1.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "High Class",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/High%20Class/High%20Class%201%20by%20Vj%20Hd.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 28
+                }
+            ],
+            "vjName": "Vj Hd",
+            "thumbnail": "High20Class202021.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "High Flyers",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/High%20Flyers/High%20Flyers%201%20by%20Vj%20Kimuli.mp4&eps_id=41512" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "High20Flyers202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Hijack",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Hijack/Hijack%201%20by%20Vj%20Junior.mp4&eps_id=43241" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 4
+                }
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "Hijack202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Hostages",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Hostages/Hostages%201%20by%20Vj%20Tom.mp4&eps_id=43370" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 9
+                }
+            ],
+            "vjName": "Vj Tom",
+            "thumbnail": "Hostages202013.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Bridgerton",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Bridgerton/Bridgerton%201%20by%20Vj%20Kimuli.mp4&eps_id=42467" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+                
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Bridgerton202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Breaking Bad",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Breaking%20Bad/Breaking%20Bad%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 24
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 12
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 5
+                } 
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Breaking20Bad202008.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Cars on the Road",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Cars%20on%20the%20Road/Cars%20on%20the%20Road%201%20by%20Vj%20Kevo.mp4&eps_id=41329" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 7
+                }
+            ],
+            "vjName": "Vj Kevo",
+            "thumbnail": "Cars20on20the20Road202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Chernobyl",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Chernobyl/Chernobyl%201%20by%20Vj%20Lance.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 9
+                }
+            ],
+            "vjName": "Vj Lance",
+            "thumbnail": "Chernobyl202019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "China Special Forces",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/China%20Special%20Forces/China%20Special%20Forces%201%20by%20Vj%20Muba.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Muba",
+            "thumbnail": "Chine20special20forces.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Juvenile Justice",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Juvenile%20Justice/Juvenile%20Justice%201%20by%20Vj%20Kam.mp4&eps_id=40460" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Kam",
+            "thumbnail": "Juvenile20Justice202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Cobra Kai",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Cobra%20Kai/Cobra%20Kai%201%20by%20Vj%20Jingo.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 6
+                }
+            ],
+            "vjName": "Vj Jingo",
+            "thumbnail": "Cobra20Kai202018.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Crash Course in Romance",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Crash%20Course%20in%20Romance/Crash%20Course%20in%20Romance%201%20by%20Vj%20Baros.mp4&eps_id=41901" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Baros",
+            "thumbnail": "Crash20Course20in20Romance202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Cuna De Lobos",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Cuna%20De%20Lobos/Cuna%20De%20Lobos%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 25
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Cuna20De20Lobos202019.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Delivery Man",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Delivery%20Man/Delivery%20Man%201%20by%20Vj%20Fredy.mp4&eps_id=42677" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Fredy",
+            "thumbnail": "Delivery-Man-2023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Destiny of White Snake",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/The%20Destiny%20of%20White%20Snake/The%20Destiny%20of%20White%20Snake%201%20by%20Vj%20Muba.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 52
+                }
+            ],
+            "vjName": "Vj Muba",
+            "thumbnail": "Destiny-of-the-white-snake.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "The Eight",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/El%20Dragon/El%20Dragon%201%20by%20Vj%20Shao%20Khan.mp4&eps_id=31237" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 23
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "ejymEc.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "El Dragon",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/El%20Dragon/El%20Dragon%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 38
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "El20Dragon.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "El Marginal",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/El%20Marginal/El%20Marginal%201%20by%20Vj%20Little%20T.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 15
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 3
+                }
+            ],
+            "vjName": "Vj Little T",
+            "thumbnail": "El20Marginal.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Emanet",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Emanet/Emanet%201%20by%20Vj%20Sammy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 140
+                }
+            ],
+            "vjName": "Vj Sammy",
+            "thumbnail": "Emanet202020.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Enola Holmes",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Enola%20Holmes/Enola%20Holmes%201%20by%20Vj%20Ulio.mp4&eps_id=42724" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 4
+                }
+            ],
+            "vjName": "Vj Ulio",
+            "thumbnail": "Enola20Holmes202020.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Boys Over Flowers",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Boys%20Over%20Flowers/Boys%20Over%20Flowers%201%20by%20Vj%20Eddy.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 25
+                }
+            ],
+            "vjName": "Vj Eddy",
+            "thumbnail": "Boys20Over20Flowers202009.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Bicheonmu",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Bicheonmu/Bicheonmu%201%20by%20Vj%20Ice%20P.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 14
+                }
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "Bicheonmu202008.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Big Bet",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Big%20Bet/Big%20Bet%201%20by%20Vj%20Baros.mp4&eps_id=42130" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 4
+                }
+            ],
+            "vjName": "Vj Baros",
+            "thumbnail": "Big20Bet202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Birth of a Beauty",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Birth%20of%20a%20Beauty/Birth%20of%20a%20Beauty%201%20by%20Mox.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 21
+                }
+            ],
+            "vjName": "Mox",
+            "thumbnail": "Birth20of20a20Beauty.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Black Knight",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Black%20Knight/Black%20Knight%201%20by%20Vj%20Ivo.mp4&eps_id=43003" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "Black20Knight202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Black Snow",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Black%20Snow/Black%20Snow%201%20by%20Vj%20Kimuli.mp4&eps_id=43217" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 7
+                }
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Black20Snow20202220-20VJ20Kimuli.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Blade Heart",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Blade%20Heart/Blade%20Heart%201%20by%20Vj%20Muba.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 21
+                }
+            ],
+            "vjName": "Vj Muba",
+            "thumbnail": "Blade20Heart.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Bloodhounds",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Bloodhounds/Bloodhounds%201%20by%20Vj%20KS.mp4&eps_id=43149" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 15
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Bloodhounds202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Bloody Romance",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Bloody%20Romance/Bloody%20Romance%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 36
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "Bloody20Romance202018.jpgh380w250atzc1.jpg"
+      },
+    
+      {
+        "title": "Brain Works",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Brain%20Works/Brain%20Works%201%20by%20Vj%20KS.mp4&eps_id=42496" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Brain20Works202023.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Breathe",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Breathe/Breathe%201%20by%20Vj%20Dan%20De.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 8
+                }
+            ],
+            "vjName": "Vj Dan De",
+            "thumbnail": "Breathe202018.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Brotherhood of Blades",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Brotherhood%20of%20Blades/Brotherhood%20of%20Blades%201%20by%20Vj%20Kam.mp4&eps_id=42364" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj Kam",
+            "thumbnail": "Brotherhood20of20Blades202014.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Beyond the Realm of Conscience",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Beyond%20the%20Realm%20of%20Conscience/Beyond%20the%20Realm%20of%20Conscience%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 24
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "Beyond20the20Realm20of20Conscience202009.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Bel-Air",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Bel-Air/Bel-Air%201%20by%20Vj%20Jimmy.mp4&eps_id=40619" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj Jimmy",
+            "thumbnail": "Bel-Air.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Becoming Witch",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Becoming%20Witch/Becoming%20Witch%201%20by%20Vj%20Eddy.mp4&eps_id=42771" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Eddy",
+            "thumbnail": "Becoming20Witch202022.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Beautiful Mind",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Beautiful%20Mind/Beautiful%20Mind%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 14
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "Beautiful20Mind202016.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Ballad of Seo Dong",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Ballad%20of%20Seo%20Dong/Ballad%20of%20Seo%20Dong%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 20
+                }
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "Ballad20of20Seo20Dong202005.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Bad Prosecutor",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Bad%20Prosecutor/Bad%20Prosecutor%201%20by%20Vj%20Fredy.mp4&eps_id=42931" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 11
+                }
+            ],
+            "vjName": "Vj Fredy",
+            "thumbnail": "Bad20Prosecutor202022.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Atypical",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Atypical/Atypical%201%20by%20Vj%20Shao%20Khan.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 38
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 10
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 10
+                },
+                {
+                    "seasonNumber": 4,
+                    "episodeCount": 10
+                }
+                
+            ],
+            "vjName": "Vj Shao Khan",
+            "thumbnail": "Atypical202017.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Atlanta",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Atlanta/Atlanta%201%20by%20Vj%20Kimuli.mp4&eps_id=41320" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 40
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 11
+                },
+                {
+                    "seasonNumber": 3,
+                    "episodeCount": 9
+                },
+                {
+                    "seasonNumber": 4,
+                    "episodeCount": 10
+                }
+                
+            ],
+            "vjName": "Vj Kimuli",
+            "thumbnail": "Atlanta202016.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "Astrophile",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Astrophile/Astrophile%201%20by%20Vj%20Baros.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 17
+                }
+            ],
+            "vjName": "Vj Baros",
+            "thumbnail": "Astrophile202022.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "As the Crow Flies",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/As%20the%20Crow%20Flies/As%20the%20Crow%20Flies%201%20by%20Vj%20Kam.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 15
+                }
+            ],
+            "vjName": "Vj Kam",
+            "thumbnail": "As20the20Crow20Flies202022.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Anna",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Anna/Anna%201%20by%20Vj%20Ivo.mp4&eps_id=42820" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Ivo",
+            "thumbnail": "Anna202022.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "All of Us Are Dead",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/All%20of%20Us%20Are%20Dead/All%20of%20Us%20Are%20Dead%201%20by%20Vj%20Ice%20P.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 12
+                }
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "photos/All-of-Us-Are-Dead-2022.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Alias",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Alias/Alias%201%20by%20Vj%20Junior.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 34
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 12
+                }
+                
+            ],
+            "vjName": "Vj Junior",
+            "thumbnail": "photos/Alias.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Alex Rider",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Alex%20Rider/Alex%20Rider%201%20by%20Vj%20Ice%20P.mp4" ,
+        "seasons": [
+        {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                },
+                {
+                    "seasonNumber": 2,
+                    "episodeCount": 8
+                }
+    
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "Alex-Rider-2020.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Age of Legends",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Age%20of%20Legends/Age%20of%20Legends%201%20by%20Vj%20Hd.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 21
+                }
+            ],
+            "vjName": "Vj Hd",
+            "thumbnail": "Age20of20Legends202018.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "Aar Ya Paar",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/Aar%20Ya%20Paar/Aar%20Ya%20Paar%201%20by%20Vj%20Emmy.mp4&eps_id=41240" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 9
+                }
+            ],
+            "vjName": "Vj Emmy",
+            "thumbnail": "Aar20Ya20Paar202022.jpgh380w250atzc1.jpg"
+      },
+     {
+        "title": "A Model Family",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/A%20Model%20Family/A%20Model%20Family%201%20by%20Vj%20KS.mp4" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 10
+                }
+            ],
+            "vjName": "Vj KS",
+            "thumbnail": "A20Model20Family202022.jpgh380w250atzc1.jpg"
+      },
+      {
+        "title": "2 Weeks",
+        "href": "https://mobifliks.info/downloadserie.php?file=luganda/2%20Weeks/2%20Weeks%201%20by%20Vj%20Ice%20P.mp4&eps_id=37453" ,
+        "seasons": [
+                {
+                    "seasonNumber": 1,
+                    "episodeCount": 16
+                }
+            ],
+            "vjName": "Vj Ice P",
+            "thumbnail": "220Weeks.jpgh380w250atzc1.jpg"
+      }
+
+];
+
+
+$('#movieModal').on('show.bs.modal', function (event) {
+    const button = $(event.relatedTarget);
+    const movieIndex = button.data('movie-index');
+    const movie = seriesData[movieIndex];
+
+    const modal = $(this);
+    modal.find("#modal-movie-title").text(movie.title);
+
+// Check if the movie is untranslated and the notification hasn't been added
+if (movie.untranslated && !movie.vjName && modal.find(".alert-warning").length === 0) {
+    const untranslatedAlert = document.createElement('div');
+    untranslatedAlert.className = 'alert alert-warning mt-2';
+    
+    // Create a link element
+    const link = document.createElement('a');
+    link.href = 'https://fresh-teacher.github.io'; // Change the URL to the appropriate link
+    link.textContent = 'click here';
+    
+    // Add the link element to the alert content
+    untranslatedAlert.innerHTML = `Unfortunately, this movie is not translated! To watch its untranslated version,  ${link.outerHTML}`;
+    
+    modal.find(".modal-body").prepend(untranslatedAlert);
+}
+
+
+    modal.find("#modal-episode-list").empty();
+
+    const seasonButtons = modal.find("#modal-season-buttons");
+    seasonButtons.empty();
+
+    if (movie.seasons && movie.seasons.length > 0) {
+    movie.seasons.forEach((season, seasonIndex) => {
+        const seasonButton = document.createElement('button');
+        seasonButton.className = 'btn btn-secondary mr-2';
+        seasonButton.textContent = `Season ${season.seasonNumber} (${season.episodeCount} Episodes)`;
+        seasonButton.dataset.seasonIndex = seasonIndex; // Add this line
+
+        // Attach the event listener to each season button
+        seasonButton.addEventListener('click', function () {
+            modal.find("#modal-episode-list").empty();
+
+            let cumulativeEpisodeCount = 0;
+            for (let i = 0; i < seasonIndex; i++) {
+                cumulativeEpisodeCount += movie.seasons[i].episodeCount;
+            }
+
+            for (let episodeIndex = 1; episodeIndex <= season.episodeCount; episodeIndex++) {
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item';
+
+        const episodeNumber = cumulativeEpisodeCount + episodeIndex;
+        const episodeLink = generateEpisodeSource(movie.title, episodeNumber, movie.vjName, movie.untranslated);
+ // Change function name here
+
+        const episodeNameElement = document.createElement("span");
+        episodeNameElement.textContent = generateEpisodeName(season.seasonNumber, episodeIndex);
+
+        listItem.appendChild(episodeNameElement);
+
+        if (episodeLink) {
+            const watchButton = document.createElement("button");
+            watchButton.className = "btn btn-success btn-sm ml-2";
+            watchButton.textContent = "Watch";
+            watchButton.addEventListener("click", () => {
+                openVideoModal(episodeLink); // Change function name here
+            });
+
+            const downloadButton = document.createElement("button");
+            downloadButton.className = "btn btn-primary btn-sm ml-2";
+            downloadButton.textContent = "Download";
+            downloadButton.addEventListener("click", () => {
+                window.location.href = episodeLink;
+            });
+
+            listItem.appendChild(document.createTextNode(" "));
+            listItem.appendChild(watchButton);
+            listItem.appendChild(document.createTextNode(" "));
+            listItem.appendChild(downloadButton);
+        }
+
+        modal.find("#modal-episode-list").append(listItem);
+    }
+});
+            seasonButtons.append(seasonButton);
+        });
+    } else {
+        // Handle case where no seasons data is available
+        const noSeasonsMessage = document.createElement('div');
+        noSeasonsMessage.className = 'col-12 text-center my-3';
+        noSeasonsMessage.textContent = 'No seasons available for this movie.';
+        seasonButtons.append(noSeasonsMessage);
+    }
+});
+
+const movieList = document.getElementById("movie-list");
+const searchInput = document.getElementById("searchInput");
+const nextPageButton = document.getElementById("next-page");
+const prevPageButton = document.getElementById("prev-page");
+
+let currentPage = 1;
+const moviesPerPage = 12;
+
+// Function to generate episode video sources
+function generateEpisodeSource(title, episodeNumber, vjName) {
+    const baseUrl = "https://mobifliks.info/downloadserie.php";
+    const encodedTitle = encodeURIComponent(title);
+    const epsId = episodeNumber;
+
+    // Customize the URL generation based on specific movie patterns
+    let episodeUrl;
+
+    // Check if the movie title follows a specific pattern
+    if (title === "Squid Game") {
+        episodeUrl = `${baseUrl}?file=luganda/${encodedTitle}/${encodedTitle}%20${episodeNumber}%20by%20${vjName}.mp4`;
+    } else if (title === "Sweet Tooth") {
+        episodeUrl = `${baseUrl}?file=luganda/${encodedTitle}/${encodedTitle}%20${episodeNumber}.mp4`;
+    } else if (title === "Vikings Valhala" || title === "Ms. Marvel") {
+        episodeUrl = `${baseUrl}?file=luganda/Vikings-%20Valhalla/${encodedTitle}%20${episodeNumber}%20by%20${vjName}.mp4`;
+    } else {
+        // Default format for other movies
+        episodeUrl = `${baseUrl}?file=luganda/${encodedTitle}/${encodedTitle}%20${episodeNumber}%20by%20${vjName}.mp4`;
+    }
+
+    return episodeUrl;
+}
+
+
+// Function to open video in the modal
+function openVideoModal(videoSource) {
+    const videoPlayerModal = document.getElementById("videoPlayer");
+    videoPlayerModal.src = videoSource;
+
+    // Show the video modal
+    $("#videoModal").modal("show");
+
+    // Add an event listener to the video modal's hidden event
+    $('#videoModal').on('hidden.bs.modal', function () {
+        // Pause the video and reset its source
+        videoPlayerModal.pause();
+        videoPlayerModal.src = "";
+    });
+}
+
+
+
+
+function generateEpisodeName(seasonNumber, episodeIndex) {
+    return `Season ${seasonNumber} Episode ${episodeIndex}`;
+}
+
+
+function renderMovies(page) {
+    const startIndex = (page - 1) * moviesPerPage;
+    const endIndex = startIndex + moviesPerPage;
+
+    const filteredMovies = seriesData.filter(movie =>
+        movie.title.toLowerCase().includes(searchInput.value.toLowerCase())
+    );
+
+    movieList.innerHTML = ""; // Clear existing content
+
+    // Add a click event listener to the scroll-to-top button
+const scrollToTopButton = document.querySelector(".scroll-to-top");
+
+// Function to show or hide the scroll-to-top button
+function toggleScrollToTopButton() {
+    if (window.scrollY > 300) {
+        scrollToTopButton.style.display = "block";
+    } else {
+        scrollToTopButton.style.display = "none";
+    }
+}
+
+// Add a scroll event listener to toggle the button visibility
+window.addEventListener("scroll", toggleScrollToTopButton);
+
+scrollToTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top smoothly
+});
+
+
+
+    if (filteredMovies.length === 0) {
+        const noResultsMessage = document.createElement("div");
+        noResultsMessage.className = "col-12 text-center my-5";
+        noResultsMessage.textContent = "No results found! Please try again with a different keyword...";
+        movieList.appendChild(noResultsMessage);
+    } else {
+        for (let i = startIndex; i < endIndex && i < filteredMovies.length; i++) {
+    const movie = filteredMovies[i];
+
+    const movieCard = document.createElement("div");
+    movieCard.className = "col-md-4 mb-4";
+
+    movieCard.innerHTML = `
+    <div class="card" data-toggle="modal" data-target="#movieModal" data-movie-index="${i}">
+        <img src="${movie.thumbnail}" class="card-img-top" alt="${movie.title}">
+        <div class="card-body">
+            <h5 class="card-title">${movie.title.toUpperCase()}</h5> <!-- Capitalize title -->
+            <p class="card-text">${movie.untranslated ? 'Untranslated Movie' : (movie.vjName ? `Translated by ${movie.vjName}` : '')}</p>
+        </div>
+    </div>
+`;
+
+    movieList.appendChild(movieCard);
+}
+    }
+
+    const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
+    document.getElementById("page-info").textContent = `Page ${currentPage} of ${totalPages}`;
+
+    if (totalPages === 1) {
+        nextPageButton.style.display = "none";
+        prevPageButton.style.display = "none";
+    } else {
+        nextPageButton.style.display = currentPage === totalPages ? "none" : "block";
+        prevPageButton.style.display = currentPage === 1 ? "none" : "block";
+    }
+
+    // Scroll to the top of the page
+    window.scrollTo(0, 0);
+}
+
+renderMovies(currentPage);
+
+searchInput.addEventListener("input", () => {
+    currentPage = 1;
+    renderMovies(currentPage);
+});
+
+nextPageButton.addEventListener("click", () => {
+    currentPage++;
+    renderMovies(currentPage);
+});
+
+prevPageButton.addEventListener("click", () => {
+    currentPage--;
+    renderMovies(currentPage);
+});
+
+$('#videoModal').on('hidden.bs.modal', function () {
+    // Remove the modal-open class from the body
+    $('body').removeClass('modal-open');
+    // Reset the body's overflow property to its original value
+    $('body').css('overflow', 'auto');
+});
+
+
+    </script>
+</body>
+</html>

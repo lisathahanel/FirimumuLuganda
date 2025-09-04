@@ -1,0 +1,213 @@
+body{
+    margin: auto;
+    padding: 0;
+    text-align: center;
+    background-color: #2f4353;
+    background-image: linear-gradient(315deg, #2f4353 74%, #d2ccc4 26%);
+}
+img{
+    margin: 15px;
+    border-radius: 10px;
+    
+    
+}
+
+#filter {
+    /* Your existing styles */
+    margin-top: 0.00000001px;
+    color: black; /* Set the text color to black */
+  }
+  
+  /* Add this CSS rule to change the pointer to a hand on hover */
+  #filter label:hover {
+    cursor: pointer;
+  }
+  
+*{
+    box-sizing: border-box;
+}
+
+#film{
+    float: right;
+    width: 80%;
+    background-image: linear-gradient(45deg,black 0 50%, grey 50% 100%);
+   
+}
+#search{
+    width: 100%;
+   
+}
+#header{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+   
+}
+ h1{
+    color: aliceblue;
+   background-color: black;
+}
+
+ #year{
+    float: none;
+    margin: 15px;
+    
+} 
+#filter{
+    float: left;
+    width: 20%;
+    background: black;
+    margin-top: 25%;
+    
+
+
+}
+
+#filter ul{
+    display: inline-block;
+}
+#filter li{
+    list-style: none;
+    text-align: left;
+    color: aliceblue;
+}
+#display{
+    position: relative;
+}
+ #inf{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    opacity: 0;
+    cursor: pointer;
+} 
+#pop h4{
+    font-weight: 600;
+    margin-left: 300px;
+    width: 200px;
+}
+#display{
+    display: inline-block;
+}
+#inf:hover{
+    opacity: 1;
+}
+
+#button{
+    cursor: pointer;
+    background-color:blue;
+    padding-top: 5px;
+     width: 50px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 4px;
+  
+   clear: both;
+   
+
+}
+
+#pop{
+    background-image: linear-gradient( 94.3deg,  rgba(26,33,64,1) 10.9%, rgba(81,84,115,1) 87.1% );
+    width: 900px;
+    border-radius: 4px;
+    border: none;
+    
+}
+ 
+#popupimg{
+    float: left;
+} 
+#geners{
+   padding: 10px;
+    margin: 10px;
+  display: inline-block;
+ 
+   border-radius: 4px;
+}
+
+#cast{
+    padding: 10px;
+    margin: 10px;
+   display: inline-block;
+   
+    
+    
+}
+#w{
+    clear: both;
+   
+}
+
+
+
+#footer{
+    background-color: aliceblue;
+}
+
+.pageni{
+    width: 80%;
+    float: left;
+   padding: 20px;
+   margin-left: 20%;
+   background-color: black;
+
+}
+
+.pageni .next, .pageni .prev{
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+    border-radius: 100%;
+    cursor: pointer;
+    
+
+}
+.pageni div{
+    display: inline-block;
+}
+.pageni .page{
+    color: white;
+}
+
+ .hide{
+    display: none!important;
+}
+
+.show{
+    display: inline-block!important;
+}
+
+ .prev.disabled,.next.disabled{
+	opacity: 0.5;
+
+	pointer-events: none;
+}
+#imd{
+    clear: both;
+    background-color: orange;
+    width: 150px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+   display: inline-block;
+}
+
+.card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
