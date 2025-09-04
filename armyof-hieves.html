@@ -115,7 +115,7 @@
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-2269884583846743"
-           data-ad-slot="3828853509"
+           data-ad-slot="2115767840"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -147,6 +147,7 @@
   transform: none;
   width: 300px;
   max-width: 300px;
+  background: rgba(0,0,0,0.5); /* semi-transparent when sticky */
 }
 .overlay-ad .ad-header {
   background: #e50914;
@@ -174,23 +175,36 @@ function toggleAd() {
   adBox.classList.toggle("minimized");
   adBox.classList.toggle("sticky");
 
-  if (adBox.classList.contains("minimized")) {
-    adHeader.textContent = "▼ Show Ad";
-  } else {
-    adHeader.textContent = "▲ Hide Ad";
-  }
+  adHeader.textContent = adBox.classList.contains("minimized") ? "▼ Show Ad" : "▲ Hide Ad";
 }
 
-// Auto-minimize after 5 seconds
+// Auto-minimize after 15 seconds on page load
 window.addEventListener("load", function() {
-  setTimeout(() => {
-    const adBox = document.getElementById("overlayAd");
-    const adHeader = document.getElementById("adHeader");
-    adBox.classList.add("minimized");
-    adBox.classList.add("sticky");
-    adHeader.textContent = "▼ Show Ad";
-  }, 5000);
+  setTimeout(minimizeAd, 15000); // 15 seconds
 });
+
+// Function to minimize the ad
+function minimizeAd() {
+  const adBox = document.getElementById("overlayAd");
+  const adHeader = document.getElementById("adHeader");
+  adBox.classList.add("minimized");
+  adBox.classList.add("sticky");
+  adHeader.textContent = "▼ Show Ad";
+}
+
+// Auto-expand every 15 minutes (900,000 ms)
+setInterval(() => {
+  const adBox = document.getElementById("overlayAd");
+  const adHeader = document.getElementById("adHeader");
+
+  // Expand the ad
+  adBox.classList.remove("minimized");
+  adBox.classList.remove("sticky");
+  adHeader.textContent = "▲ Hide Ad";
+
+  // Then auto-minimize after 15 seconds
+  setTimeout(minimizeAd, 15000);
+}, 900000); // 15 minutes
 </script>
 
 
