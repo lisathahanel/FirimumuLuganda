@@ -3,125 +3,107 @@
 <html lang="en">
 <head>
 
+  <style>
+    /* Iframe always visible */
+    #ad-frame {
+      width: 560px;
+      height: 315px;
+      border: none;
+      margin: 20px auto;
+      display: block;
+    }
 
-  <style> 
-  #site-gate {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    padding: 10px;
-    background: #111;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    z-index: 9999;
-    text-align: center;
-  }
+    /* Fullscreen semi-transparent gate overlay */
+    #site-gate {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.85); /* semi-transparent so iframe shows behind */
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      text-align: center;
+      backdrop-filter: blur(3px); /* optional blur effect behind overlay */
+    }
 
-  #site-gate h1 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #00ff00;
-  }
+    #site-gate h1 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #00ff00;
+    }
 
-  #math-box { margin-top: 15px; }
+    #play-btn {
+      padding: 15px 35px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #28a745;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-  button.answer-btn {
-    padding: 12px 25px;
-    font-size: 18px;
-    margin: 5px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  button.correct { background: #28a745; color: #fff; }
-  button.wrong   { background: #dc3545; color: #fff; }
+    #play-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ff00;
+    }
 
-  #opening-msg {
-    display: none;
-    margin-top: 20px;
-    font-size: 20px;
-    color: #ffff00;
-  }
+    #opening-msg {
+      display: none;
+      margin-top: 20px;
+      font-size: 20px;
+      color: #ffff00;
+    }
 
-  #ad-frame {
-    display: none;
-    margin-top: 15px;
-    width: 560px;
-    height: 315px;
-    border: none;
-  }
+    /* Responsive iframe */
+    @media (max-width: 600px) {
+      #ad-frame {
+        width: 90%;
+        height: auto;
+      }
+    }
   </style>
 </head>
 <body>
-  <div id='site-gate'>  
+  <!-- Iframe always visible -->
+  <iframe 
+    id="ad-frame"
+    src="https://firimumu.paypalads.com/"
+    title="Movie iframe">
+  </iframe>
+
+  <!-- Fullscreen semi-transparent gate overlay -->
+  <div id='site-gate'>
     <h1>VERIFY TO ENTER</h1>
-
-    <div id='math-box'>
-      <p id="question"></p>
-      <div id="answers"></div>
-    </div>
-
+    <button id="play-btn">Play Movie</button>
     <div id="opening-msg">
-      ✅ Correct! Now opening... please wait 
-      <span id="countdown">3</span> seconds
+      ✅ OK! Now playing... please wait <span id="countdown">3</span> seconds
     </div>
-
-    <!-- Iframe appears after correct answer -->
-    <iframe 
-      id="ad-frame"
-      src="https://firimumu.paypalads.com/"
-      title="Ad frame">
-    </iframe>
   </div>
 
   <script>
-    const questionEl = document.getElementById("question");
-    const answersEl  = document.getElementById("answers");
+    const playBtn = document.getElementById("play-btn");
     const openingMsg = document.getElementById("opening-msg");
-    const gate       = document.getElementById("site-gate");
-    const countdownEl= document.getElementById("countdown");
-    const adFrame    = document.getElementById("ad-frame");
+    const countdownEl = document.getElementById("countdown");
+    const gate = document.getElementById("site-gate");
 
-    function generateQuestion() {
-      let a = Math.floor(Math.random() * 10) + 1;
-      let b = Math.floor(Math.random() * 10) + 1;
-      let correctAnswer = a + b;
+    playBtn.onclick = function() {
+      // Hide button
+      playBtn.style.display = "none";
 
-      questionEl.textContent = `${a} + ${b} = ?`;
-
-      let wrong1 = correctAnswer + 1;
-      let wrong2 = correctAnswer + 2;
-      let options = [correctAnswer, wrong1, wrong2];
-      options = options.sort(() => Math.random() - 0.5);
-
-      answersEl.innerHTML = "";
-      options.forEach(opt => {
-        let btn = document.createElement("button");
-        btn.textContent = opt;
-        btn.className = "answer-btn";
-        if (opt === correctAnswer) {
-          btn.classList.add("correct");
-          btn.onclick = correctHandler;
-        } else {
-          btn.classList.add("wrong");
-          btn.onclick = () => alert("❌ Wrong, try again!");
-        }
-        answersEl.appendChild(btn);
-      });
-    }
-
-    function correctHandler() {
-      document.getElementById("math-box").style.display = "none";
+      // Show opening message
       openingMsg.style.display = "block";
-      adFrame.style.display = "block";
 
+      // Countdown 3 seconds then hide gate
       let timeLeft = 3;
       countdownEl.textContent = timeLeft;
+
       const interval = setInterval(() => {
         timeLeft--;
         countdownEl.textContent = timeLeft;
@@ -130,9 +112,7 @@
           gate.style.display = "none";
         }
       }, 1000);
-    }
-
-    generateQuestion();
+    };
   </script>
 
 
@@ -625,6 +605,7 @@ document.addEventListener("DOMContentLoaded", function() {
   </main>
 
 </html>
+
 
 
 
