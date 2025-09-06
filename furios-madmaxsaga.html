@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 
-<style>
+<style> 
 /* Fullscreen gate */
 #site-gate {
   position: fixed;
@@ -43,7 +43,7 @@
   100% { transform: scale(1); text-shadow: 2px 2px 8px #000; }
 }
 
-.g-recaptcha, #math-box {
+#math-box {
   margin-top: 20px;
   display: none; /* hidden until countdown ends */
 }
@@ -91,7 +91,6 @@ button.wrong {
   #site-gate h1 { font-size: 28px; }
   #countdown { font-size: 32px; }
   button.answer-btn { font-size: 16px; padding: 10px 20px; }
-  .g-recaptcha { transform: scale(0.75); transform-origin: 0 0; }
 }
 </style>
 
@@ -100,68 +99,52 @@ button.wrong {
   
   <div id='countdown'>5</div>
 
-  <!-- Desktop reCAPTCHA v2 -->
-  <div class='g-recaptcha' data-callback='unlockSite' data-sitekey='6LdGTr4rAAAAAAk8jYjamBYnNzhsdIvevibdOcFk'/>
-
-  <!-- Mobile math box -->
+  <!-- Math question (all devices) -->
   <div id='math-box'>
     <p>What is 1 + 1?</p>
     <button class='answer-btn correct' onclick='unlockSite()'>2</button>
     <button class='answer-btn wrong' onclick='wrongAnswer(this)'>22</button>
   </div>
-  
-  
-  <iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' frameborder='0' height='315' referrerpolicy='strict-origin-when-cross-origin' src='https://www.paypalads.com/search/label/movies1000' title='YouTube video player' width='560'/>
-  
 </div>
-
-<script async='async' defer='defer' src='https://www.google.com/recaptcha/api.js'/>
 
 <script>
 let count = 5;
-const countdownEl = document.getElementById(&quot;countdown&quot;);
-const captchaEl = document.querySelector(&quot;.g-recaptcha&quot;);
-const mathBox = document.getElementById(&quot;math-box&quot;);
+const countdownEl = document.getElementById("countdown");
+const mathBox = document.getElementById("math-box");
 
-// Detect mobile
-const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-
-const interval = setInterval(() =&gt; {
+const interval = setInterval(() => {
   count--;
-  if (count &gt; 0) {
+  if (count > 0) {
     countdownEl.textContent = count;
   } else {
     clearInterval(interval);
-    countdownEl.style.display = &quot;none&quot;; // hide countdown
-    if (isMobile) {
-      mathBox.style.display = &quot;block&quot;;   // show math question
-    } else {
-      captchaEl.style.display = &quot;block&quot;; // show desktop reCAPTCHA
-    }
+    countdownEl.style.display = "none"; 
+    mathBox.style.display = "block";   // show math question
   }
 }, 1000);
 
 function unlockSite() {
-  document.getElementById(&quot;site-gate&quot;).style.display = &quot;none&quot;;
-  sessionStorage.setItem(&quot;verified&quot;, &quot;true&quot;);
+  document.getElementById("site-gate").style.display = "none";
+  sessionStorage.setItem("verified", "true");
 }
 
 function wrongAnswer(btn) {
   // Shake the button
-  btn.style.animation = &quot;shake 0.5s&quot;;
-  // Remove animation after it ends so it can trigger again
-  btn.addEventListener(&quot;animationend&quot;, () =&gt; {
-    btn.style.animation = &quot;pulseButton 1.2s infinite&quot;;
+  btn.style.animation = "shake 0.5s";
+  // Reset animation so it can shake again
+  btn.addEventListener("animationend", () => {
+    btn.style.animation = "pulseButton 1.2s infinite";
   }, {once: true});
 }
 
 // Skip gate if already verified
 window.onload = function() {
-  if (sessionStorage.getItem(&quot;verified&quot;) === &quot;true&quot;) {
-    document.getElementById(&quot;site-gate&quot;).style.display = &quot;none&quot;;
+  if (sessionStorage.getItem("verified") === "true") {
+    document.getElementById("site-gate").style.display = "none";
   }
 };
 </script>
+
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"
      crossorigin="anonymous"></script>
@@ -650,4 +633,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </section>
   </main>
+
 </html>
