@@ -5,13 +5,11 @@
 
 
   <style> 
-  /* Fullscreen gate */
   #site-gate {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     padding: 10px;
-    box-sizing: border-box;
     background: #111;
     color: #fff;
     display: flex;
@@ -23,16 +21,13 @@
   }
 
   #site-gate h1 {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     color: #00ff00;
-    text-shadow: 2px 2px 5px #000;
   }
 
-  #math-box {
-    margin-top: 20px;
-  }
+  #math-box { margin-top: 15px; }
 
   button.answer-btn {
     padding: 12px 25px;
@@ -42,48 +37,15 @@
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
-    animation: pulseButton 1.2s infinite;
   }
-
-  button.correct {
-    background: #28a745;
-    color: #fff;
-  }
-
-  button.wrong {
-    background: #dc3545;
-    color: #fff;
-  }
-
-  /* Pulsating math button */
-  @keyframes pulseButton {
-    0% { transform: scale(1); box-shadow: 0 0 5px #fff; }
-    50% { transform: scale(1.1); box-shadow: 0 0 15px #00ff00; }
-    100% { transform: scale(1); box-shadow: 0 0 5px #fff; }
-  }
-
-  /* Shake animation for wrong answer */
-  @keyframes shake {
-    0% { transform: translateX(0); }
-    20% { transform: translateX(-5px); }
-    40% { transform: translateX(5px); }
-    60% { transform: translateX(-5px); }
-    80% { transform: translateX(5px); }
-    100% { transform: translateX(0); }
-  }
+  button.correct { background: #28a745; color: #fff; }
+  button.wrong { background: #dc3545; color: #fff; }
 
   #opening-msg {
     display: none;
     margin-top: 20px;
-    font-size: 22px;
+    font-size: 20px;
     color: #ffff00;
-    text-shadow: 2px 2px 6px #000;
-  }
-
-  #countdown {
-    font-size: 24px;
-    color: #ff3333;
-    margin-top: 10px;
   }
   </style>
 </head>
@@ -91,102 +53,76 @@
   <div id='site-gate'>  
     <h1>VERIFY TO ENTER</h1>
 
-    <!-- Math question -->
     <div id='math-box'>
-      <p id="question"></p>
+      <p id="question">Loading question...</p>
       <div id="answers"></div>
     </div>
-
-
-  <iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' frameborder='0' height='315' referrerpolicy='strict-origin-when-cross-origin' src='https://firimumu.paypalads.com/' title='YouTube video player' width='560'/>
 
     <div id="opening-msg">
       ✅ Correct! Now opening... please wait 
       <span id="countdown">5</span> seconds
     </div>
+
+  <iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' frameborder='0' height='315' referrerpolicy='strict-origin-when-cross-origin' src='https://firimumu.paypalads.com/' title='YouTube video player' width='560'/>
+
   </div>
 
   <script>
-  const questionEl = document.getElementById("question");
-  const answersEl  = document.getElementById("answers");
-  const openingMsg = document.getElementById("opening-msg");
-  const gate       = document.getElementById("site-gate");
-  const countdownEl= document.getElementById("countdown");
+  window.onload = function() {
+    const questionEl = document.getElementById("question");
+    const answersEl  = document.getElementById("answers");
+    const openingMsg = document.getElementById("opening-msg");
+    const gate       = document.getElementById("site-gate");
+    const countdownEl= document.getElementById("countdown");
 
-  function generateQuestion() {
-    let a = Math.floor(Math.random() * 10) + 1;
-    let b = Math.floor(Math.random() * 10) + 1;
-    let isAddition = Math.random() > 0.5;
+    function generateQuestion() {
+      let a = Math.floor(Math.random() * 10) + 1;
+      let b = Math.floor(Math.random() * 10) + 1;
+      let correctAnswer = a + b;
 
-    let correctAnswer;
-    let qText;
+      questionEl.textContent = `${a} + ${b} = ?`;
 
-    if (isAddition) {
-      correctAnswer = a + b;
-      qText = `${a} + ${b} = ?`;
-    } else {
-      // ensure non-negative result
-      if (a < b) [a, b] = [b, a];
-      correctAnswer = a - b;
-      qText = `${a} - ${b} = ?`;
+      // generate wrong answers
+      let wrong1 = correctAnswer + 1;
+      let wrong2 = correctAnswer + 2;
+      let options = [correctAnswer, wrong1, wrong2];
+      options = options.sort(() => Math.random() - 0.5);
+
+      answersEl.innerHTML = "";
+      options.forEach(opt => {
+        let btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.className = "answer-btn";
+        if (opt === correctAnswer) {
+          btn.classList.add("correct");
+          btn.onclick = correctHandler;
+        } else {
+          btn.classList.add("wrong");
+          btn.onclick = () => alert("❌ Wrong, try again!");
+        }
+        answersEl.appendChild(btn);
+      });
     }
 
-    questionEl.textContent = qText;
+    function correctHandler() {
+      document.getElementById("math-box").style.display = "none";
+      openingMsg.style.display = "block";
 
-    // Generate wrong answers
-    let wrong1 = correctAnswer + (Math.floor(Math.random() * 3) + 1);
-    let wrong2 = correctAnswer - (Math.floor(Math.random() * 3) + 1);
-    if (wrong2 < 0) wrong2 = wrong1 + 2;
-
-    let options = [correctAnswer, wrong1, wrong2];
-    options = [...new Set(options)]; // remove duplicates
-    options = options.sort(() => Math.random() - 0.5); // shuffle
-
-    // Clear old buttons
-    answersEl.innerHTML = "";
-
-    options.forEach(opt => {
-      let btn = document.createElement("button");
-      btn.textContent = opt;
-      btn.className = "answer-btn";
-      if (opt === correctAnswer) {
-        btn.classList.add("correct");
-        btn.addEventListener("click", correctHandler);
-      } else {
-        btn.classList.add("wrong");
-        btn.addEventListener("click", () => wrongHandler(btn));
-      }
-      answersEl.appendChild(btn);
-    });
-  }
-
-  function correctHandler() {
-    document.getElementById("math-box").style.display = "none";
-    openingMsg.style.display = "block";
-
-    let timeLeft = 5;
-    countdownEl.textContent = timeLeft;
-    const interval = setInterval(() => {
-      timeLeft--;
+      let timeLeft = 5;
       countdownEl.textContent = timeLeft;
-      if (timeLeft <= 0) {
-        clearInterval(interval);
-        gate.style.display = "none";
-      }
-    }, 1000);
-  }
+      const interval = setInterval(() => {
+        timeLeft--;
+        countdownEl.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          gate.style.display = "none";
+        }
+      }, 1000);
+    }
 
-  function wrongHandler(btn) {
-    btn.style.animation = "shake 0.5s";
-    btn.addEventListener("animationend", () => {
-      btn.style.animation = "pulseButton 1.2s infinite";
-    }, { once: true });
+    generateQuestion();
   }
-
-  // Start on page load
-  generateQuestion();
   </script>
-
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"
      crossorigin="anonymous"></script>
@@ -677,3 +613,4 @@ document.addEventListener("DOMContentLoaded", function() {
   </main>
 
 </html>
+
