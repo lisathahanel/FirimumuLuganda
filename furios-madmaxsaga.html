@@ -29,23 +29,8 @@
   text-shadow: 2px 2px 5px #000;
 }
 
-#countdown {
-  font-size: 40px;
-  margin-bottom: 20px;
-  color: #ffff00;
-  text-shadow: 2px 2px 8px #000;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); text-shadow: 2px 2px 8px #000; }
-  50% { transform: scale(1.3); text-shadow: 2px 2px 20px #fff; }
-  100% { transform: scale(1); text-shadow: 2px 2px 8px #000; }
-}
-
 #math-box {
   margin-top: 20px;
-  display: none; /* hidden until countdown ends */
 }
 
 button.answer-btn {
@@ -86,67 +71,49 @@ button.wrong {
   100% { transform: translateX(0); }
 }
 
-/* Mobile adjustments */
-@media (max-width: 480px) {
-  #site-gate h1 { font-size: 28px; }
-  #countdown { font-size: 32px; }
-  button.answer-btn { font-size: 16px; padding: 10px 20px; }
+#opening-msg {
+  display: none;
+  margin-top: 20px;
+  font-size: 22px;
+  color: #ffff00;
+  text-shadow: 2px 2px 6px #000;
 }
 </style>
 
 <div id='site-gate'>  
   <h1>VERIFY TO WATCH</h1>
-  
-  <div id='countdown'>5</div>
 
-  <!-- Math question (all devices) -->
+  <!-- Math question -->
   <div id='math-box'>
     <p>What is 1 + 1?</p>
-    <button class='answer-btn correct' onclick='unlockSite()'>2</button>
+    <button class='answer-btn correct' onclick='startOpening()'>2</button>
     <button class='answer-btn wrong' onclick='wrongAnswer(this)'>22</button>
   </div>
 
-  
-  <iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' frameborder='0' height='315' referrerpolicy='strict-origin-when-cross-origin' src='https://firimumu.paypalads.com/' title='YouTube video player' width='560'/>
-  
+  <div id="opening-msg">✅ Correct! Now opening... please wait 5 seconds</div>
 </div>
 
+
+  <iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' frameborder='0' height='315' referrerpolicy='strict-origin-when-cross-origin' src='https://firimumu.paypalads.com/' title='Furiosa: A Mad Max Saga (2024) vj junior' width='560'/>
+  
 <script>
-let count = 5;
-const countdownEl = document.getElementById("countdown");
-const mathBox = document.getElementById("math-box");
+function startOpening() {
+  document.getElementById("math-box").style.display = "none";
+  const msg = document.getElementById("opening-msg");
+  msg.style.display = "block";
 
-const interval = setInterval(() => {
-  count--;
-  if (count > 0) {
-    countdownEl.textContent = count;
-  } else {
-    clearInterval(interval);
-    countdownEl.style.display = "none"; 
-    mathBox.style.display = "block";   // show math question
-  }
-}, 1000);
-
-function unlockSite() {
-  document.getElementById("site-gate").style.display = "none";
-  sessionStorage.setItem("verified", "true");
+  // Wait 5 seconds before unlocking
+  setTimeout(() => {
+    document.getElementById("site-gate").style.display = "none";
+  }, 5000);
 }
 
 function wrongAnswer(btn) {
-  // Shake the button
   btn.style.animation = "shake 0.5s";
-  // Reset animation so it can shake again
   btn.addEventListener("animationend", () => {
     btn.style.animation = "pulseButton 1.2s infinite";
   }, {once: true});
 }
-
-// Skip gate if already verified
-window.onload = function() {
-  if (sessionStorage.getItem("verified") === "true") {
-    document.getElementById("site-gate").style.display = "none";
-  }
-};
 </script>
 
 
@@ -639,5 +606,6 @@ document.addEventListener("DOMContentLoaded", function() {
   </main>
 
 </html>
+
 
 
