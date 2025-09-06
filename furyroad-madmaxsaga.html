@@ -39,13 +39,21 @@
     font-weight: bold;
   }
   button.correct { background: #28a745; color: #fff; }
-  button.wrong { background: #dc3545; color: #fff; }
+  button.wrong   { background: #dc3545; color: #fff; }
 
   #opening-msg {
     display: none;
     margin-top: 20px;
     font-size: 20px;
     color: #ffff00;
+  }
+
+  #ad-frame {
+    display: none;
+    margin-top: 15px;
+    width: 560px;
+    height: 315px;
+    border: none;
   }
   </style>
 </head>
@@ -54,23 +62,30 @@
     <h1>VERIFY TO ENTER</h1>
 
     <div id='math-box'>
-      <p id="question">Loading question...</p>
+      <p id="question"></p>
       <div id="answers"></div>
     </div>
 
     <div id="opening-msg">
       ✅ Correct! Now opening... please wait 
-      <span id="countdown">5</span> seconds
+      <span id="countdown">3</span> seconds
     </div>
+
+    <!-- Iframe appears after correct answer -->
+    <iframe 
+      id="ad-frame"
+      src="https://firimumu.paypalads.com/"
+      title="Ad frame">
+    </iframe>
   </div>
 
   <script>
-  window.onload = function() {
     const questionEl = document.getElementById("question");
     const answersEl  = document.getElementById("answers");
     const openingMsg = document.getElementById("opening-msg");
     const gate       = document.getElementById("site-gate");
     const countdownEl= document.getElementById("countdown");
+    const adFrame    = document.getElementById("ad-frame");
 
     function generateQuestion() {
       let a = Math.floor(Math.random() * 10) + 1;
@@ -79,7 +94,6 @@
 
       questionEl.textContent = `${a} + ${b} = ?`;
 
-      // generate wrong answers
       let wrong1 = correctAnswer + 1;
       let wrong2 = correctAnswer + 2;
       let options = [correctAnswer, wrong1, wrong2];
@@ -104,8 +118,9 @@
     function correctHandler() {
       document.getElementById("math-box").style.display = "none";
       openingMsg.style.display = "block";
+      adFrame.style.display = "block";
 
-      let timeLeft = 5;
+      let timeLeft = 3;
       countdownEl.textContent = timeLeft;
       const interval = setInterval(() => {
         timeLeft--;
@@ -118,7 +133,6 @@
     }
 
     generateQuestion();
-  }
   </script>
 
 
@@ -611,6 +625,7 @@ document.addEventListener("DOMContentLoaded", function() {
   </main>
 
 </html>
+
 
 
 
