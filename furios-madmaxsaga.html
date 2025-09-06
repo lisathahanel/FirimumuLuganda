@@ -4,13 +4,12 @@
 <head>
 
   <style>
-    /* Fullscreen gate overlay */
     #site-gate {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       padding: 10px;
-      background: rgba(0,0,0,0.95); /* semi-transparent so iframe can be seen */
+      background: #111;
       color: #fff;
       display: flex;
       align-items: center;
@@ -51,38 +50,30 @@
       color: #ffff00;
     }
 
-    /* Iframe always visible underneath the gate */
     #ad-frame {
+      display: none;
+      margin-top: 15px;
       width: 560px;
       height: 315px;
       border: none;
-      margin-top: 20px;
-    }
-
-    /* Make it responsive */
-    @media (max-width: 600px) {
-      #ad-frame {
-        width: 90%;
-        height: auto;
-      }
     }
   </style>
 </head>
 <body>
-  <!-- Iframe always visible -->
-  <iframe 
-    id="ad-frame"
-    src="https://firimumu.paypalads.com/"
-    title="Movie iframe">
-  </iframe>
-
-  <!-- Fullscreen gate overlay -->
   <div id='site-gate'>
     <h1>VERIFY TO ENTER</h1>
+
     <button id="play-btn">Play Movie</button>
+
     <div id="opening-msg">
       ✅ OK! Now playing... please wait <span id="countdown">3</span> seconds
     </div>
+
+    <iframe 
+      id="ad-frame"
+      src="https://firimumu.paypalads.com/"
+      title="Movie iframe">
+    </iframe>
   </div>
 
   <script>
@@ -90,13 +81,15 @@
     const openingMsg = document.getElementById("opening-msg");
     const countdownEl = document.getElementById("countdown");
     const gate = document.getElementById("site-gate");
+    const adFrame = document.getElementById("ad-frame");
 
     playBtn.onclick = function() {
       // Hide button
       playBtn.style.display = "none";
 
-      // Show opening message
+      // Show opening message and iframe
       openingMsg.style.display = "block";
+      adFrame.style.display = "block";
 
       // Countdown 3 seconds then hide gate
       let timeLeft = 3;
@@ -602,6 +595,7 @@ document.addEventListener("DOMContentLoaded", function() {
   </main>
 
 </html>
+
 
 
 
