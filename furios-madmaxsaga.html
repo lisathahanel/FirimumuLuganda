@@ -3,117 +3,189 @@
 <html lang="en">
 <head>
 
-<style> 
-/* Fullscreen gate */
-#site-gate {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  background: #111;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  z-index: 9999;
-  text-align: center;
-}
 
-#site-gate h1 {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: #00ff00;
-  text-shadow: 2px 2px 5px #000;
-}
+  <style> 
+  /* Fullscreen gate */
+  #site-gate {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+    text-align: center;
+  }
 
-#math-box {
-  margin-top: 20px;
-}
+  #site-gate h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #00ff00;
+    text-shadow: 2px 2px 5px #000;
+  }
 
-button.answer-btn {
-  padding: 12px 25px;
-  font-size: 18px;
-  margin: 5px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  animation: pulseButton 1.2s infinite;
-}
+  #math-box {
+    margin-top: 20px;
+  }
 
-button.correct {
-  background: #28a745;
-  color: #fff;
-}
+  button.answer-btn {
+    padding: 12px 25px;
+    font-size: 18px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    animation: pulseButton 1.2s infinite;
+  }
 
-button.wrong {
-  background: #dc3545;
-  color: #fff;
-}
+  button.correct {
+    background: #28a745;
+    color: #fff;
+  }
 
-/* Pulsating math button */
-@keyframes pulseButton {
-  0% { transform: scale(1); box-shadow: 0 0 5px #fff; }
-  50% { transform: scale(1.1); box-shadow: 0 0 15px #00ff00; }
-  100% { transform: scale(1); box-shadow: 0 0 5px #fff; }
-}
+  button.wrong {
+    background: #dc3545;
+    color: #fff;
+  }
 
-/* Shake animation for wrong answer */
-@keyframes shake {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-5px); }
-  40% { transform: translateX(5px); }
-  60% { transform: translateX(-5px); }
-  80% { transform: translateX(5px); }
-  100% { transform: translateX(0); }
-}
+  /* Pulsating math button */
+  @keyframes pulseButton {
+    0% { transform: scale(1); box-shadow: 0 0 5px #fff; }
+    50% { transform: scale(1.1); box-shadow: 0 0 15px #00ff00; }
+    100% { transform: scale(1); box-shadow: 0 0 5px #fff; }
+  }
 
-#opening-msg {
-  display: none;
-  margin-top: 20px;
-  font-size: 22px;
-  color: #ffff00;
-  text-shadow: 2px 2px 6px #000;
-}
-</style>
+  /* Shake animation for wrong answer */
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+  }
 
-<div id='site-gate'>  
-  <h1>VERIFY TO WATCH</h1>
+  #opening-msg {
+    display: none;
+    margin-top: 20px;
+    font-size: 22px;
+    color: #ffff00;
+    text-shadow: 2px 2px 6px #000;
+  }
 
-  <!-- Math question -->
-  <div id='math-box'>
-    <p>What is 1 + 1?</p>
-    <button class='answer-btn correct' onclick='startOpening()'>2</button>
-    <button class='answer-btn wrong' onclick='wrongAnswer(this)'>22</button>
+  #countdown {
+    font-size: 24px;
+    color: #ff3333;
+    margin-top: 10px;
+  }
+  </style>
+</head>
+<body>
+  <div id='site-gate'>  
+    <h1>VERIFY TO ENTER</h1>
+
+    <!-- Math question -->
+    <div id='math-box'>
+      <p id="question"></p>
+      <div id="answers"></div>
+    </div>
+
+
+  <iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' frameborder='0' height='315' referrerpolicy='strict-origin-when-cross-origin' src='https://firimumu.paypalads.com/' title='YouTube video player' width='560'/>
+
+    <div id="opening-msg">
+      ✅ Correct! Now opening... please wait 
+      <span id="countdown">5</span> seconds
+    </div>
   </div>
 
-<iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' frameborder='0' height='315' referrerpolicy='strict-origin-when-cross-origin' src='https://www.paypalads.com/search/label/movies1000' title='Furiosa: A Mad Max Saga (2024) vj junior' width='560'/
-  
-  <div id="opening-msg">✅ Correct! Now opening... please wait 5 seconds</div>
-</div>
+  <script>
+  const questionEl = document.getElementById("question");
+  const answersEl  = document.getElementById("answers");
+  const openingMsg = document.getElementById("opening-msg");
+  const gate       = document.getElementById("site-gate");
+  const countdownEl= document.getElementById("countdown");
 
-<script>
-function startOpening() {
-  document.getElementById("math-box").style.display = "none";
-  const msg = document.getElementById("opening-msg");
-  msg.style.display = "block";
+  function generateQuestion() {
+    let a = Math.floor(Math.random() * 10) + 1;
+    let b = Math.floor(Math.random() * 10) + 1;
+    let isAddition = Math.random() > 0.5;
 
-  // Wait 5 seconds before unlocking
-  setTimeout(() => {
-    document.getElementById("site-gate").style.display = "none";
-  }, 5000);
-}
+    let correctAnswer;
+    let qText;
 
-function wrongAnswer(btn) {
-  btn.style.animation = "shake 0.5s";
-  btn.addEventListener("animationend", () => {
-    btn.style.animation = "pulseButton 1.2s infinite";
-  }, {once: true});
-}
-</script>
+    if (isAddition) {
+      correctAnswer = a + b;
+      qText = `${a} + ${b} = ?`;
+    } else {
+      // ensure non-negative result
+      if (a < b) [a, b] = [b, a];
+      correctAnswer = a - b;
+      qText = `${a} - ${b} = ?`;
+    }
+
+    questionEl.textContent = qText;
+
+    // Generate wrong answers
+    let wrong1 = correctAnswer + (Math.floor(Math.random() * 3) + 1);
+    let wrong2 = correctAnswer - (Math.floor(Math.random() * 3) + 1);
+    if (wrong2 < 0) wrong2 = wrong1 + 2;
+
+    let options = [correctAnswer, wrong1, wrong2];
+    options = [...new Set(options)]; // remove duplicates
+    options = options.sort(() => Math.random() - 0.5); // shuffle
+
+    // Clear old buttons
+    answersEl.innerHTML = "";
+
+    options.forEach(opt => {
+      let btn = document.createElement("button");
+      btn.textContent = opt;
+      btn.className = "answer-btn";
+      if (opt === correctAnswer) {
+        btn.classList.add("correct");
+        btn.addEventListener("click", correctHandler);
+      } else {
+        btn.classList.add("wrong");
+        btn.addEventListener("click", () => wrongHandler(btn));
+      }
+      answersEl.appendChild(btn);
+    });
+  }
+
+  function correctHandler() {
+    document.getElementById("math-box").style.display = "none";
+    openingMsg.style.display = "block";
+
+    let timeLeft = 5;
+    countdownEl.textContent = timeLeft;
+    const interval = setInterval(() => {
+      timeLeft--;
+      countdownEl.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        gate.style.display = "none";
+      }
+    }, 1000);
+  }
+
+  function wrongHandler(btn) {
+    btn.style.animation = "shake 0.5s";
+    btn.addEventListener("animationend", () => {
+      btn.style.animation = "pulseButton 1.2s infinite";
+    }, { once: true });
+  }
+
+  // Start on page load
+  generateQuestion();
+  </script>
 
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"
@@ -605,6 +677,7 @@ document.addEventListener("DOMContentLoaded", function() {
   </main>
 
 </html>
+
 
 
 
