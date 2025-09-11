@@ -493,7 +493,7 @@ document.addEventListener("DOMContentLoaded", function() {
   </main>
 <!-- Anchor Ad Placement -->
 <div id="anchor-ad">
-  <div id="anchor-toggle">▲</div>
+  <div id="anchor-toggle">▲ Ad</div>
   <div id="anchor-content">
     <div id="anchor-rotation-slot"></div>
   </div>
@@ -516,18 +516,14 @@ document.addEventListener("DOMContentLoaded", function() {
 }
 #anchor-toggle {
   background: #f1f1f1;
-  font-size: 12px;       /* smaller toggle */
+  font-size: 13px;
   color: #333;
   cursor: pointer;
-  padding: 2px 6px;      /* smaller padding */
+  padding: 4px;
   text-align: center;
   border-bottom: 1px solid #ddd;
-  width: 40px;            /* compact width */
-  margin: 0 auto;
-  border-radius: 4px 4px 0 0;
 }
 #anchor-content {
-  overflow: hidden;
   transition: all 0.3s ease;
 }
 #anchor-rotation-slot {
@@ -548,15 +544,15 @@ const content = document.getElementById("anchor-content");
 const adSlot = document.getElementById("anchor-rotation-slot");
 let hidden = false;
 
-// Toggle hide/show manually
+// Toggle hide/show
 toggleBtn.addEventListener("click", function() {
   if (!hidden) {
     content.style.display = "none";
-    toggleBtn.innerHTML = "▼";
+    toggleBtn.innerHTML = "▼ Ad";
     hidden = true;
   } else {
     content.style.display = "block";
-    toggleBtn.innerHTML = "▲";
+    toggleBtn.innerHTML = "▲ Ad";
     hidden = false;
   }
 });
@@ -572,12 +568,10 @@ const adUnits = [
 let currentAdIndex = 0;
 
 function loadAnchorAd() {
-  // Reset styles
   adSlot.style.opacity = "0";
   adSlot.style.transform = "translateY(20px)";
 
   setTimeout(() => {
-    // Load ad HTML
     adSlot.innerHTML = `
       <ins class="adsbygoogle"
            style="${adUnits[currentAdIndex].style}"
@@ -587,25 +581,25 @@ function loadAnchorAd() {
            data-full-width-responsive="true"></ins>
     `;
     (adsbygoogle = window.adsbygoogle || []).push({});
-
-    // Fade + slide in
     setTimeout(() => {
       adSlot.style.opacity = "1";
       adSlot.style.transform = "translateY(0)";
     }, 50);
-
   }, 200);
 
   currentAdIndex = (currentAdIndex + 1) % adUnits.length;
 }
 
-// Load first ad immediately
+// Load the first anchor ad immediately
 loadAnchorAd();
 
-// Rotate every 10 minutes (600000 ms)
-setInterval(loadAnchorAd, 600000);
+// After 10 minutes, start rotating every 35 seconds
+setTimeout(() => {
+  setInterval(loadAnchorAd, 35000);
+}, 600000); // 600,000 ms = 10 min
 </script>
 
   
 </html>
+
 
