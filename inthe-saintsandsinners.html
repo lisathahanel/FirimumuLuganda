@@ -493,7 +493,7 @@ document.addEventListener("DOMContentLoaded", function() {
   </main>
 <!-- Anchor Ad Placement -->
 <div id="anchor-ad">
-  <div id="anchor-toggle">▲ Ad</div>
+  <div id="anchor-toggle">▲</div>
   <div id="anchor-content">
     <div id="anchor-rotation-slot"></div>
   </div>
@@ -516,17 +516,19 @@ document.addEventListener("DOMContentLoaded", function() {
 }
 #anchor-toggle {
   background: #f1f1f1;
-  font-size: 13px;
+  font-size: 12px;       /* smaller toggle */
   color: #333;
   cursor: pointer;
-  padding: 4px;
+  padding: 2px 6px;      /* smaller padding */
   text-align: center;
   border-bottom: 1px solid #ddd;
+  width: 40px;            /* compact width */
+  margin: 0 auto;
+  border-radius: 4px 4px 0 0;
 }
 #anchor-content {
   overflow: hidden;
-  height: auto;
-  transition: height 0.5s ease;
+  transition: all 0.3s ease;
 }
 #anchor-rotation-slot {
   opacity: 0;
@@ -549,12 +551,12 @@ let hidden = false;
 // Toggle hide/show manually
 toggleBtn.addEventListener("click", function() {
   if (!hidden) {
-    content.style.height = "0px";
-    toggleBtn.innerHTML = "▼ Ad";
+    content.style.display = "none";
+    toggleBtn.innerHTML = "▼";
     hidden = true;
   } else {
-    content.style.height = "auto";
-    toggleBtn.innerHTML = "▲ Ad";
+    content.style.display = "block";
+    toggleBtn.innerHTML = "▲";
     hidden = false;
   }
 });
@@ -573,7 +575,6 @@ function loadAnchorAd() {
   // Reset styles
   adSlot.style.opacity = "0";
   adSlot.style.transform = "translateY(20px)";
-  content.style.height = "0px"; // minimized initially
 
   setTimeout(() => {
     // Load ad HTML
@@ -587,16 +588,11 @@ function loadAnchorAd() {
     `;
     (adsbygoogle = window.adsbygoogle || []).push({});
 
-    // Expand ad (sticky) for 10 seconds
-    content.style.height = "auto"; 
-    adSlot.style.opacity = "1";
-    adSlot.style.transform = "translateY(0)";
-
+    // Fade + slide in
     setTimeout(() => {
-      if (!hidden) {
-        content.style.height = "40px"; // auto-minimize after 10s
-      }
-    }, 10000);
+      adSlot.style.opacity = "1";
+      adSlot.style.transform = "translateY(0)";
+    }, 50);
 
   }, 200);
 
@@ -609,5 +605,7 @@ loadAnchorAd();
 // Rotate every 10 minutes (600000 ms)
 setInterval(loadAnchorAd, 600000);
 </script>
+
   
 </html>
+
