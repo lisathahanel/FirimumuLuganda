@@ -494,8 +494,10 @@ document.addEventListener("DOMContentLoaded", function() {
 <!-- Anchor Ad Placement -->
 <div id="anchor-ad">
   <div id="anchor-toggle">▲ Ad</div>
+  
   <div id="anchor-content">
-    <div id="anchor-rotation-slot"></div>
+    <!-- Ad Rotation Container -->
+    <div id="ad-rotation"></div>
   </div>
 </div>
 
@@ -526,25 +528,64 @@ document.addEventListener("DOMContentLoaded", function() {
 #anchor-content {
   transition: all 0.3s ease;
 }
-#anchor-rotation-slot {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
 body {
   padding-bottom: 120px; /* keep space for the ad */
 }
 </style>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743" crossorigin="anonymous"></script>
+<!-- Load AdSense once -->
+<script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743" crossorigin="anonymous"></script>
 
 <script>
 const toggleBtn = document.getElementById("anchor-toggle");
 const content = document.getElementById("anchor-content");
-const adSlot = document.getElementById("anchor-rotation-slot");
+const adContainer = document.getElementById("ad-rotation");
+
 let hidden = false;
 
-// Toggle hide/show
+// Ad units list
+const adUnits = [
+  { slot: "5742141919", w: 768, h: 90 },
+  { slot: "3580304316", w: 728, h: 90 },
+  { slot: "8811425590", w: 300, h: 50 }
+];
+
+let currentAd = 0;
+
+// Function to load ads
+function loadAd(index) {
+  adContainer.innerHTML = ""; // clear previous ad
+  
+  const ins = document.createElement("ins");
+  ins.className = "adsbygoogle";
+  ins.style.display = "inline-block";
+  ins.style.width = adUnits[index].w + "px";
+  ins.style.height = adUnits[index].h + "px";
+  ins.setAttribute("data-ad-client", "ca-pub-2269884583846743");
+  ins.setAttribute("data-ad-slot", adUnits[index].slot);
+
+  adContainer.appendChild(ins);
+
+  try {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  } catch (e) {}
+
+  // Always expand when a new ad loads
+  content.style.display = "block";
+  toggleBtn.innerHTML = "▲ Ad";
+  hidden = false;
+}
+
+// Initial ad
+loadAd(currentAd);
+
+// Rotate ads every 35 seconds
+setInterval(() => {
+  currentAd = (currentAd + 1) % adUnits.length;
+  loadAd(currentAd);
+}, 35000);
+
+// Toggle button
 toggleBtn.addEventListener("click", function() {
   if (!hidden) {
     content.style.display = "none";
@@ -556,50 +597,9 @@ toggleBtn.addEventListener("click", function() {
     hidden = false;
   }
 });
-
-// --- Ad Rotation Setup ---
-const adUnits = [
-  { slot: "5742141919", format: "auto", style: "display:inline-block;width:768px;height:90px" }, // Anchor 768x90
-  { slot: "2115767840", format: "auto", style: "display:block" }, // Vertical ad
-  { slot: "7284297604", format: "auto", style: "display:block" }, // Square Top m2a
-  { slot: "3828853509", format: "auto", style: "display:block" }  // Square ads
-];
-
-let currentAdIndex = 0;
-
-function loadAnchorAd() {
-  adSlot.style.opacity = "0";
-  adSlot.style.transform = "translateY(20px)";
-
-  setTimeout(() => {
-    adSlot.innerHTML = `
-      <ins class="adsbygoogle"
-           style="${adUnits[currentAdIndex].style}"
-           data-ad-client="ca-pub-2269884583846743"
-           data-ad-slot="${adUnits[currentAdIndex].slot}"
-           data-ad-format="${adUnits[currentAdIndex].format}"
-           data-full-width-responsive="true"></ins>
-    `;
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    setTimeout(() => {
-      adSlot.style.opacity = "1";
-      adSlot.style.transform = "translateY(0)";
-    }, 50);
-  }, 200);
-
-  currentAdIndex = (currentAdIndex + 1) % adUnits.length;
-}
-
-// Load the first anchor ad immediately
-loadAnchorAd();
-
-// After 10 minutes, start rotating every 35 seconds
-setTimeout(() => {
-  setInterval(loadAnchorAd, 35000);
-}, 600000); // 600,000 ms = 10 min
 </script>
-
   
 </html>
+
 
 
