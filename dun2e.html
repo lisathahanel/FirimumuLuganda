@@ -166,46 +166,6 @@
 }
 </style>
 
-<script>
-function toggleAd() {
-  const adBox = document.getElementById("overlayAd");
-  const adHeader = document.getElementById("adHeader");
-
-  adBox.classList.toggle("minimized");
-  adBox.classList.toggle("sticky");
-
-  adHeader.textContent = adBox.classList.contains("minimized") ? "▼ Show Ad" : "▲ Hide Ad";
-}
-
-// Auto-minimize after 15 seconds on page load
-window.addEventListener("load", function() {
-  setTimeout(minimizeAd, 15000); // 15 seconds
-});
-
-// Function to minimize the ad
-function minimizeAd() {
-  const adBox = document.getElementById("overlayAd");
-  const adHeader = document.getElementById("adHeader");
-  adBox.classList.add("minimized");
-  adBox.classList.add("sticky");
-  adHeader.textContent = "▼ Show Ad";
-}
-
-// Auto-expand every 15 minutes (900,000 ms)
-setInterval(() => {
-  const adBox = document.getElementById("overlayAd");
-  const adHeader = document.getElementById("adHeader");
-
-  // Expand the ad
-  adBox.classList.remove("minimized");
-  adBox.classList.remove("sticky");
-  adHeader.textContent = "▲ Hide Ad";
-
-  // Then auto-minimize after 15 seconds
-  setTimeout(minimizeAd, 15000);
-}, 900000); // 15 minutes
-</script>
-
 
   <!-- Ad Section -->
   <div style="width: 100%; height: 10px; background-color: orange; margin: 10px 0;"></div>
