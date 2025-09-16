@@ -456,15 +456,7 @@ document.addEventListener("DOMContentLoaded", function() {
   <div id="anchor-toggle">▲ Ad</div>
   
   <div id="anchor-content">
-    <script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743" crossorigin="anonymous"></script>
-    <!-- 768x90 Anchor Ad -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:768px;height:90px"
-         data-ad-client="ca-pub-2269884583846743"
-         data-ad-slot="5742141919"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    <div id="ad-anchor-container" style="min-height:100px;"></div>
   </div>
 </div>
 
@@ -482,6 +474,7 @@ document.addEventListener("DOMContentLoaded", function() {
   box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
   border-top: 1px solid #ddd;
   font-family: sans-serif;
+  transition: all 0.3s ease;
 }
 #anchor-toggle {
   background: #f1f1f1;
@@ -491,31 +484,126 @@ document.addEventListener("DOMContentLoaded", function() {
   padding: 4px;
   text-align: center;
   border-bottom: 1px solid #ddd;
+  pointer-events: auto;
 }
 #anchor-content {
   transition: all 0.3s ease;
 }
 body {
-  padding-bottom: 120px; /* keep space for the ad */
+  padding-bottom: 120px;
+}
+
+/* Sticky mode */
+#anchor-ad.sticky {
+  top: 0 !important;
+  bottom: auto !important;
 }
 </style>
 
 <script>
+// Ad rotation units
+const adUnits = [
+  `
+  <!-- Square ad -->
+  <ins class="adsbygoogle"
+       data-ad-client="ca-pub-2269884583846743"
+       data-ad-slot="3828853509"
+       data-ad-format="auto"
+       data-full-width-responsive="true"
+       style="display:block"></ins>
+  `,
+  `
+  <!-- Horizontal ad -->
+  <ins class="adsbygoogle"
+       data-ad-client="ca-pub-2269884583846743"
+       data-ad-slot="1481343022"
+       data-ad-format="auto"
+       data-full-width-responsive="true"
+       style="display:block"></ins>
+  `
+];
+
+const anchorContainer = document.getElementById("ad-anchor-container");
+const anchorAd = document.getElementById("anchor-ad");
 const toggleBtn = document.getElementById("anchor-toggle");
 const content = document.getElementById("anchor-content");
+let currentAdIndex = 0;
 let hidden = false;
+let rotationInterval;
 
+// Load ad function
+function loadAd(index, container) {
+  container.innerHTML = adUnits[index];
+  try {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  } catch(e) { console.warn("AdSense load error:", e); }
+}
+
+// Load initial ad
+loadAd(currentAdIndex, anchorContainer);
+
+// Start rotation
+function startRotation() {
+  rotationInterval = setInterval(() => {
+    currentAdIndex = (currentAdIndex + 1) % adUnits.length;
+    loadAd(currentAdIndex, anchorContainer);
+  }, 35000);
+}
+
+// Stop rotation
+function stopRotation() {
+  clearInterval(rotationInterval);
+}
+
+// Start rotation initially
+startRotation();
+
+// Anchor toggle functionality
 toggleBtn.addEventListener("click", function() {
   if (!hidden) {
     content.style.display = "none";
     toggleBtn.innerHTML = "▼ Ad";
     hidden = true;
+    stopRotation(); // stop rotation when minimized
   } else {
     content.style.display = "block";
     toggleBtn.innerHTML = "▲ Ad";
     hidden = false;
+    startRotation(); // resume rotation when expanded
   }
 });
+
+// Sticky temporary behavior with countdown
+setTimeout(() => {
+  // Auto-expand if minimized
+  if (hidden) {
+    content.style.display = "block";
+    toggleBtn.innerHTML = "▲ Ad";
+    hidden = false;
+    startRotation(); // resume rotation if it was paused
+  }
+
+  anchorAd.classList.add("sticky"); // make sticky at top
+  let countdown = 4;
+
+  // Disable toggle while counting
+  toggleBtn.style.pointerEvents = "none";
+
+  toggleBtn.innerHTML = countdown;
+  const interval = setInterval(() => {
+    countdown--;
+    toggleBtn.innerHTML = countdown > 0 ? countdown : "▲ Ad";
+    if (countdown <= 0) {
+      clearInterval(interval);
+      anchorAd.classList.remove("sticky"); // back to normal bottom
+      toggleBtn.innerHTML = "▲ Ad";
+      toggleBtn.style.pointerEvents = "auto"; // enable toggle again
+    }
+  }, 1000);
+}, 2000); // wait 2 seconds before sticky
 </script>
+
+<!-- Google AdSense Script -->
+<script async crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"></script>
 
 </html>
