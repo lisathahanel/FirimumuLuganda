@@ -485,6 +485,138 @@
   }
 </style>
 
+<!-- ✅ Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+  /* 🎬 Featured Slider */
+  .featured-slider {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  }
+  .swiper-slide { position: relative; }
+  .swiper-slide img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+  }
+  .slide-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+    color: white;
+  }
+  .slide-overlay h2 {
+    font-size: 22px;
+    margin: 0;
+  }
+  .swiper-button-next, .swiper-button-prev {
+    color: #fff;
+    text-shadow: 0 0 10px #000;
+  }
+  @media(max-width:768px){
+    .swiper-slide img{ height:260px; }
+    .slide-overlay h2{ font-size:16px; }
+  }
+
+  /* 🐙 GitHub Embed Section */
+  #github-html-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #111;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    color: #eee;
+  }
+</style>
+
+<!-- ✅ Featured Slider (TOP) -->
+<div class="featured-slider">
+  <div class="swiper">
+    <div class="swiper-wrapper" id="featured-posts"></div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
+
+<!-- ✅ GitHub Embed (BOTTOM, above footer) -->
+<div id="github-html-container">
+  <h2>💻 Extra HTML from GitHub</h2>
+  <div id="github-html-content">Loading...</div>
+</div>
+
+<!-- ✅ Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  /* 🎬 Load Featured Posts */
+  function renderFeaturedPosts(json) {
+    let slidesHTML = "";
+    for (let i = 0; i < Math.min(5, json.feed.entry.length); i++) {
+      let entry = json.feed.entry[i];
+      let title = entry.title.$t;
+      let url = entry.link.find(l => l.rel === "alternate").href;
+
+      let imgUrl = "";
+      if (entry.media$thumbnail) {
+        imgUrl = entry.media$thumbnail.url.replace("/s72-c/", "/s1200/");
+      } else {
+        let content = entry.content.$t;
+        let imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+        imgUrl = imgMatch && imgMatch[1] ? imgMatch[1] : "assets/img/placeholder.jpg";
+      }
+
+      slidesHTML += `
+        <div class="swiper-slide">
+          <a href="${url}">
+            <img src="${imgUrl}" alt="${title}">
+            <div class="slide-overlay">
+              <h2>${title}</h2>
+            </div>
+          </a>
+        </div>`;
+    }
+    document.getElementById("featured-posts").innerHTML = slidesHTML;
+
+    // Init Swiper
+    new Swiper(".swiper", {
+      loop: true,
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      pagination: { el: ".swiper-pagination", clickable: true },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }
+    });
+  }
+</script>
+
+<!-- ✅ Blogger Feed JSONP -->
+<script src="https://www.paypalads.com/feeds/posts/default?alt=json-in-script&max-results=5&callback=renderFeaturedPosts"></script>
+
+<script>
+  /* 🐙 Load GitHub HTML */
+  async function loadGithubHTML() {
+    try {
+      // replace with your raw GitHub URL:
+      let res = await fetch("https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/file.html");
+      if (!res.ok) throw new Error("Network response not ok");
+      let text = await res.text();
+      document.getElementById("github-html-content").innerHTML = text;
+    } catch (e) {
+      document.getElementById("github-html-content").innerHTML = "⚠️ Failed to load content from GitHub.";
+    }
+  }
+  loadGithubHTML();
+</script>
+
+  
 </script></span></b></span></strong></div><ul class="wp-block-list"><li style="text-align: center;"><a href="https://www.paypalads.com/search" style="font-size: large;" target="_blank">Search</a><span style="font-size: large;">&nbsp;|&nbsp;</span><a href="https://www.paypalads.com/p/contact-us.html" style="font-size: large;" target="_blank">Contact US</a></li><li style="text-align: center;"><span style="font-size: medium;"><a href="https://www.paypalads.com/p/privacy-policy.html" target="_blank">Privacy policy</a>&nbsp;|&nbsp;<a href="https://www.paypalads.com/p/affiliate-marketing-and-adsense.html" target="_blank">Disclosure</a></span></li><span style="font-size: medium;"><!--/wp:list-item--><!--wp:list-item-->
 <!--/wp:list-item-->
 
