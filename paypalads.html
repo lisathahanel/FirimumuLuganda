@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paypal Ads</title>
+
+  <!-- SEO Meta -->
+  <meta name="description" content="All In One SITE Learning And Entertainment">
+
+  <!-- Stylesheets -->
+  <link href="styles/general.css" rel="stylesheet">
+  <link href="styles/header.css" rel="stylesheet">
+  <link href="styles/video.css" rel="stylesheet">
+  <link href="styles/sidebar.css" rel="stylesheet">
+</head>
+<body style="background:#000; color:#fff; font-family:Arial, sans-serif;">
+
+  <!-- ✅ Main Post Content -->
+  <main>
+    <!-- Page Title (for previews) -->
+    <h1 style="text-align:center; color:#fff; margin:20px 0;">
+       All In One Learning And Entertainment
+    </h1>
+    
+  </main>
+<style>  
+  body {
+    zoom: 0.9;
+  }
+
+  /* Bottom sticky footer */
+  #sticky-footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;                    /* center horizontally */
+    transform: translateX(-50%);
+    width: 100%;
+    background: #fff;
+    border-top: 2px solid #ccc;
+    z-index: 9999;
+    padding: 5px 0;
+  }
+
+  /* Ad container centered */
+  #sticky-footer .ad-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+
+  /* Menu links wrapper - scrollable if overflow */
+  #sticky-footer .menu {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 5px;
+  }
+
+  /* Individual menu links */
+  #sticky-footer a {
+    flex: 0 0 auto;
+    font-family: Georgia, Utopia, &quot;Palatino Linotype&quot;, Palatino, serif;
+    font-weight: 700;
+    padding: 10px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+
+  /* Hide scrollbar but keep scrollable */
+  #sticky-footer .menu::-webkit-scrollbar {
+    display: none;
+  }
+  #sticky-footer .menu {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+
+<style>
+  /* Hide ads on mobile and tablet */
+  @media (max-width: 1024px) {
+    #anchor-ad-left, #anchor-ad-right {
+      display: none !important;
+    }
+  }
+
+  /* Show ads only on desktop */
+  @media (min-width: 1025px) {
+    #anchor-ad-left, #anchor-ad-right {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9999;
+      text-align: center;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      border: 1px solid #ddd;
+      font-family: sans-serif;
+    }
+
+    #anchor-ad-left {
+      left: 0;
+    }
+
+    #anchor-ad-right {
+      right: 0;
+    }
+
+    #anchor-toggle-left, #anchor-toggle-right {
+      background: #f1f1f1;
+      font-size: 13px;
+      color: #333;
+      cursor: pointer;
+      padding: 4px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #anchor-content-left, #anchor-content-right {
+      transition: all 0.3s ease;
+    }
+  }
+</style>
+
+
+
+<div id="movie-label-posts"></div>
+
+<style>
+  .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .movie-card {
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+    transition: transform 0.3s ease;
+  }
+
+  .movie-card:hover {
+    transform: scale(1.05);
+  }
+
+  .poster {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 2/3;
+  }
+
+  .poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s ease-in-out;
+  }
+
+  .movie-card:hover img {
+    filter: brightness(0.5);
+    transform: scale(1.05);
+  }
+
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: white;
+    background: rgba(229,9,20,0.9);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    box-shadow: 0 0 20px #e50914;
+    pointer-events: none;
+  }
+
+  .movie-title {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    background: #e50914;
+    color: white;
+    text-transform: capitalize;
+  }
+
+  @media (max-width: 600px) {
+    .movie-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      padding: 15px;
+    }
+
+    .play-button {
+      font-size: 36px;
+      width: 55px;
+      height: 55px;
+      line-height: 55px;
+    }
+
+    .movie-title {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+</style>
+
+<script>
+  // Fetch latest 20 posts from WordPress REST API
+  fetch('https://m2a.shop/wp-json/wp/v2/posts?per_page=20&_embed')
+    .then(res => res.json())
+    .then(posts => {
+      let html = '<div class="movie-grid">';
+      posts.forEach(post => {
+        const title = post.title.rendered;
+        const url = post.link;
+        // Get featured image if exists
+        let imgUrl = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0] ? post._embedded['wp:featuredmedia'][0].source_url : 'https://via.placeholder.com/300x450?text=No+Image';
+
+        html += `
+          <div class="movie-card">
+            <a href="${url}" title="${title}">
+              <div class="poster">
+                <img src="${imgUrl}" alt="${title}">
+                <div class="play-button">&#9658;</div>
+              </div>
+              <div class="movie-title">${title}</div>
+            </a>
+          </div>
+        `;
+      });
+      html += '</div>';
+      document.getElementById('movie-label-posts').innerHTML = html;
+    })
+    .catch(err => console.error('Error fetching posts:', err));
+</script>
+</body>
+</html>
