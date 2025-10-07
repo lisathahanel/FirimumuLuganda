@@ -66,6 +66,177 @@
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
+<!-- Movie Auto-Slider Grid -->
+<div class="movie-slider-wrapper">
+  <div id="movie-slider" class="movie-slider"></div>
+</div>
+
+<script type="text/javascript">
+  function renderMovieSlider(json) {
+    var postsHTML = '';
+    var maxPosts = 10;
+    for (var i = 0; i < Math.min(json.feed.entry.length, maxPosts); i++) {
+      var entry = json.feed.entry[i];
+      var title = entry.title.$t;
+      var url = '';
+      for (var j = 0; j < entry.link.length; j++) {
+        if (entry.link[j].rel === 'alternate') {
+          url = entry.link[j].href;
+          break;
+        }
+      }
+
+      var imgUrl = '';
+      if (entry.media$thumbnail) {
+        imgUrl = entry.media$thumbnail.url.replace('/s72-c/', '/s640/');
+      } else {
+        var content = entry.content.$t;
+        var imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+        imgUrl = imgMatch && imgMatch[1] ? imgMatch[1] : 'https://via.placeholder.com/300x450?text=No+Image';
+      }
+
+      postsHTML += `
+        <div class="movie-card">
+          <a href="${url}" title="${title}" target="_blank" rel="noopener noreferrer">
+            <div class="poster">
+              <img src="${imgUrl}" alt="${title}">
+              <div class="play-button">&#9658;</div>
+            </div>
+            <div class="movie-title">${title}</div>
+          </a>
+        </div>
+      `;
+    }
+    document.getElementById('movie-slider').innerHTML = postsHTML;
+    startMovieSlider();
+  }
+
+  function startMovieSlider() {
+    const slider = document.querySelector('#movie-slider');
+    let scrollAmount = 0;
+    const slideStep = 1; // pixels per frame
+    const slideSpeed = 15; // lower = faster
+    const resetDelay = 2000;
+
+    function autoSlide() {
+      scrollAmount += slideStep;
+      if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+        scrollAmount = 0;
+        slider.scrollTo({ left: 0, behavior: 'auto' });
+        setTimeout(autoSlide, resetDelay);
+      } else {
+        slider.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+        setTimeout(autoSlide, slideSpeed);
+      }
+    }
+
+    autoSlide();
+  }
+</script>
+
+
+<!-- Blogger JSON Feed for label "mobland", showing 10 posts -->
+<script src="https://www.paypalads.com/feeds/posts/default/-/movies1000?alt=json-in-script&callback=renderMovieSlider&max-results=1000"></script>
+
+<style>
+  .movie-slider-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 20px 0;
+  }
+
+  .movie-slider {
+    display: flex;
+    gap: 20px;
+    padding: 10px 30px;
+  }
+
+  .movie-card {
+    min-width: 180px;
+    max-width: 180px;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .movie-card:hover {
+    transform: scale(1.05);
+  }
+
+  .poster {
+    position: relative;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+  }
+
+  .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: 0.3s ease;
+  }
+
+  .movie-card:hover img {
+    filter: brightness(0.5);
+    transform: scale(1.05);
+  }
+
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: white;
+    background: rgba(229, 9, 20, 0.9);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    box-shadow: 0 0 20px #e50914;
+    pointer-events: none;
+  }
+
+  .movie-title {
+    text-align: center;
+    background: #e50914;
+    color: white;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  @media (max-width: 600px) {
+    .movie-card {
+      min-width: 130px;
+      max-width: 130px;
+    }
+
+    .play-button {
+      font-size: 36px;
+      width: 55px;
+      height: 55px;
+      line-height: 55px;
+    }
+
+    .movie-title {
+      font-size: 13px;
+      padding: 8px;
+    }
+
+    .movie-slider {
+      gap: 14px;
+      padding: 10px 20px;
+    }
+  }
+</style>
+  
 <style>
   .search-box {
     display: flex;
