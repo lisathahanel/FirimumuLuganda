@@ -1,12 +1,423 @@
-<div style='width: 100%; height: 10px; background-color: gold; margin: 10px 0;'/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VJ JUNIOR translated movies</title>
 
-  <p style='text-align: center; background-color: white; color: #333333; font-family: Merriweather, Georgia, serif;'>
-  Advertisement
-</p>
+  <!-- SEO Meta -->
+  <meta name="description" content="Watch and Download full Movie translated by VJ Junior #Kagujje #uganda">
 
-<script async='async' crossorigin='anonymous' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743'/>
+  
+  <script async='async' crossorigin='anonymous' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743'/>
 <!-- Vertical New -->
 <ins class='adsbygoogle' data-ad-client='ca-pub-2269884583846743' data-ad-format='auto' data-ad-slot='2906167922' data-full-width-responsive='true' style='display:block'/>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+
+  <h2 style="text-align: center;"><span style="font-size: x-large;">KRAVEN THE HUNTER - VJ JUNIOR</span></h2>
+
+  <div style="text-align: center;">
+    
+</div>
+  
+    <!-- 🎬 Video Player -->
+    <div class="video-wrapper" style="position:relative; width:100%; height:500px; margin:20px 0;">
+      <iframe class="video-iframe"
+        src="https://www.paypalads.com"
+        style="width:100%; height:100%; border:none;">
+      </iframe>
+    </div>
+  </main>
+
+<!-- Movie Auto-Slider Grid -->
+<div class="movie-slider-wrapper">
+  <div id="movie-slider" class="movie-slider"></div>
+</div>
+
+<script type="text/javascript">
+  function renderMovieSlider(json) {
+    var postsHTML = '';
+    var maxPosts = 10;
+    for (var i = 0; i < Math.min(json.feed.entry.length, maxPosts); i++) {
+      var entry = json.feed.entry[i];
+      var title = entry.title.$t;
+      var url = '';
+      for (var j = 0; j < entry.link.length; j++) {
+        if (entry.link[j].rel === 'alternate') {
+          url = entry.link[j].href;
+          break;
+        }
+      }
+
+      var imgUrl = '';
+      if (entry.media$thumbnail) {
+        imgUrl = entry.media$thumbnail.url.replace('/s72-c/', '/s640/');
+      } else {
+        var content = entry.content.$t;
+        var imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+        imgUrl = imgMatch && imgMatch[1] ? imgMatch[1] : 'https://via.placeholder.com/300x450?text=No+Image';
+      }
+
+      postsHTML += `
+        <div class="movie-card">
+          <a href="${url}" title="${title}" target="_blank" rel="noopener noreferrer">
+            <div class="poster">
+              <img src="${imgUrl}" alt="${title}">
+              <div class="play-button">&#9658;</div>
+            </div>
+            <div class="movie-title">${title}</div>
+          </a>
+        </div>
+      `;
+    }
+    document.getElementById('movie-slider').innerHTML = postsHTML;
+    startMovieSlider();
+  }
+
+  function startMovieSlider() {
+    const slider = document.querySelector('#movie-slider');
+    let scrollAmount = 0;
+    const slideStep = 1; // pixels per frame
+    const slideSpeed = 15; // lower = faster
+    const resetDelay = 2000;
+
+    function autoSlide() {
+      scrollAmount += slideStep;
+      if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+        scrollAmount = 0;
+        slider.scrollTo({ left: 0, behavior: 'auto' });
+        setTimeout(autoSlide, resetDelay);
+      } else {
+        slider.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+        setTimeout(autoSlide, slideSpeed);
+      }
+    }
+
+    autoSlide();
+  }
+</script>
+
+
+<!-- Blogger JSON Feed for label "mobland", showing 10 posts -->
+<script src="https://www.paypalads.com/feeds/posts/default/-/movies1000?alt=json-in-script&callback=renderMovieSlider&max-results=1000"></script>
+
+<style>
+  .movie-slider-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 20px 0;
+  }
+
+  .movie-slider {
+    display: flex;
+    gap: 20px;
+    padding: 10px 30px;
+  }
+
+  .movie-card {
+    min-width: 180px;
+    max-width: 180px;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .movie-card:hover {
+    transform: scale(1.05);
+  }
+
+  .poster {
+    position: relative;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+  }
+
+  .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: 0.3s ease;
+  }
+
+  .movie-card:hover img {
+    filter: brightness(0.5);
+    transform: scale(1.05);
+  }
+
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: white;
+    background: rgba(229, 9, 20, 0.9);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    box-shadow: 0 0 20px #e50914;
+    pointer-events: none;
+  }
+
+  .movie-title {
+    text-align: center;
+    background: #e50914;
+    color: white;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  @media (max-width: 600px) {
+    .movie-card {
+      min-width: 130px;
+      max-width: 130px;
+    }
+
+    .play-button {
+      font-size: 36px;
+      width: 55px;
+      height: 55px;
+      line-height: 55px;
+    }
+
+    .movie-title {
+      font-size: 13px;
+      padding: 8px;
+    }
+
+    .movie-slider {
+      gap: 14px;
+      padding: 10px 20px;
+    }
+  }
+</style>
+  
+<style>
+  .search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto;
+    max-width: 500px;
+    width: 90%;
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    padding: 6px 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 12px;
+    font-size: 16px;
+    border-radius: 30px;
+  }
+  .search-box button {
+    background: gold;
+    border: none;
+    padding: 10px 18px;
+    margin-left: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    transition: 0.3s;
+  }
+  .search-box button:hover { background: #e6b800; }
+
+  #results {
+    max-width: 1000px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .result-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+  }
+  .result-card:hover { transform: translateY(-4px); }
+
+  .result-image-wrapper {
+    position: relative;
+    cursor: pointer;
+  }
+  .result-image-wrapper img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #ddd;
+  }
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .play-button::after {
+    content: "";
+    border-style: solid;
+    border-width: 12px 0 12px 20px;
+    border-color: transparent transparent transparent #ff0000;
+    margin-left: 4px;
+  }
+
+  .result-card-content {
+    padding: 12px;
+  }
+  .result-card a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .result-card p {
+    font-size: 14px;
+    color: #555;
+  }
+</style>
+
+<form class="search-box" onsubmit="searchPosts(event)">
+  <input id="search-input" type="text"/>
+  <button type="submit">Search</button>
+</form>
+
+<div id="results"></div>
+
+<script>
+async function searchPosts(e, auto = false) {
+  if (e) e.preventDefault();
+  const query = document.getElementById("search-input").value;
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = "<p>Loading...</p>";
+
+  try {
+    const res = await fetch(`https://m2a.shop/wp-json/wp/v2/posts?_embed&search=${encodeURIComponent(query)}`);
+    const posts = await res.json();
+
+    if (posts.length === 0) {
+      resultsDiv.innerHTML = "<p>No results found.</p>";
+      return;
+    }
+
+    resultsDiv.innerHTML = posts.map(post => {
+      let imgHtml = "";
+      if (post._embedded && post._embedded['wp:featuredmedia']) {
+        const imgUrl = post._embedded['wp:featuredmedia'][0].source_url;
+        imgHtml = `
+          <div class="result-image-wrapper" onclick="window.open('${post.link}', '_blank')">
+            <img src="${imgUrl}" alt="${post.title.rendered}">
+            <div class="play-button"></div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="result-card">
+          ${imgHtml}
+          <div class="result-card-content">
+            <a href="${post.link}" target="_blank">${post.title.rendered}</a>
+            <p>${post.excerpt.rendered.replace(/<[^>]+>/g, "").substring(0, 120)}...</p>
+          </div>
+        </div>
+      `;
+    }).join("");
+  } catch (err) {
+    resultsDiv.innerHTML = "<p>Error fetching results.</p>";
+  }
+}
+
+// Auto search on page load
+window.addEventListener("DOMContentLoaded", () => {
+  const defaultKeyword = " "; // change this word as needed
+  document.getElementById("search-input").value = defaultKeyword;
+  searchPosts(null, true);
+});
+</script>
+  
+
+<div style="background-color: white; color: black; font-family: Georgia, serif; padding: 10px; text-align: center;">
+  <p>
+    <a href="https://www.paypalads.com/p/contact-us_14.html" style="background-color: white; border: 1px solid rgb(0, 0, 0); color: black; padding: 5px 10px; text-decoration: none;">Contact Us</a>&nbsp;<a href="https://www.firimumu.paypalads.com/" style="border: 1px solid rgb(0, 0, 0); color: black; padding: 5px 10px; text-decoration-line: none;">Movies</a>&nbsp;<a href="https://www.paypalads.com/p/privacy-policy.html" style="border: 1px solid rgb(0, 0, 0); color: black; padding: 5px 10px; text-decoration-line: none;">Privacy Policy</a></p>
+  <p>
+    <a href="https://www.paypalads.com/p/terms-and-conditions.html" style="background-color: white; border: 1px solid rgb(0, 0, 0); color: black; padding: 5px 10px; text-decoration: none;">Terms &amp; Conditions</a>
+  </p>
+  <p>
+    <a href="https://www.paypalads.com/p/affiliate-marketing-and-adsense.html" style="background-color: white; border: 1px solid rgb(0, 0, 0); color: black; padding: 5px 10px; text-decoration: none;">Disclosure</a>
+  </p>
+</div>
+
+<style>
+  .search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto;
+    max-width: 500px;
+    width: 90%;
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    padding: 6px 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  .search-box input[type=&quot;text&quot;] {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 12px;
+    font-size: 16px;
+    border-radius: 30px;
+  }
+
+  .search-box button {
+    background: gold;
+    border: none;
+    outline: none;
+    padding: 10px 18px;
+    margin-left: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    transition: 0.3s;
+  }
+
+  .search-box button:hover {
+    background: #e6b800;
+  }
+</style>
+
+<p style="background-color: white; border-top: 1px solid rgb(0, 0, 0); color: black; font-family: Georgia, serif; padding: 8px; text-align: center;">Copyright © 2025 Paypalads.com All Rights Reserved</p><p style="background-color: white; border-top: 1px solid rgb(0, 0, 0); color: black; font-family: Georgia, serif; padding: 8px; text-align: center;"><br /></p>
+ 
+</body>
+</html>
