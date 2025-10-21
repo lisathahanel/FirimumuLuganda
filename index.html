@@ -79,20 +79,304 @@
 <!-- ✅ Main Post Content -->
 <main>
 
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Grid container for menu + search box */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* left, middle(search), right */
+    align-items: start;
+    justify-items: center;
+    gap: 40px; /* horizontal spacing */
+    margin: 40px auto;
+    max-width: 1200px;
+  }
+
+  /* Left and right menu lists */
+  .menu-left, .menu-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .menu-left a, .menu-right a {
+    text-decoration: none;
+    font-weight: 700;
+    color: #757575;
+    padding: 8px 12px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* Search box column */
+  .search-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie-search-box {
+    max-width: 300px; /* fit nicely in column */
+    width: 100%;
+  }
+
+  .movie-search-box form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #1c1c1c;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .movie-search-box input[type="text"] {
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: #111;
+    color: #fff;
+  }
+
+  .movie-search-box input::placeholder {
+    color: #bbb;
+  }
+
+  .movie-search-box button {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .movie-search-box button:hover {
+    background-color: #b00610;
+  }
+
+  #header-ad {
+    margin: 0 auto 20px;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    text-align: center;
+    width: 200px;
+  }
+
+  .ad-label {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* Responsive: stack vertically on small screens */
+  @media (max-width: 800px) {
+    .menu-grid {
+      grid-template-columns: 1fr;
+      gap: 20px 0;
+    }
+    .menu-left, .menu-right {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .search-column {
+      order: -1; /* put search box first on mobile */
+    }
+  }
+</style>
+
+<div class="menu-grid">
+  <!-- Left menu items -->
+  <div class="menu-left">
+    <a href="/" rel="nofollow" target="_blank">Home</a>
+    <a href="https://www.firimumu.paypalads.com/" rel="nofollow" target="_blank">Movies</a>
+    <a href="https://paypalads.com/blog" rel="nofollow" target="_blank">Blogs</a>
+  </div>
+
+  <!-- Middle search box -->
+  <div class="search-column">
+    <div class="movie-search-box">
+      <form action="/search" method="get">
+        <!-- Top Ad -->
+        <div id="header-ad">
+          <span class="ad-label">Ad</span>
+          <script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743" crossorigin="anonymous"></script>
+          <!-- 200 by 200 -->
+          <ins class="adsbygoogle"
+            style="display:inline-block;width:200px;height:200px"
+            data-ad-client="ca-pub-2269884583846743"
+            data-ad-slot="1267838847"></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+
+        <input name="q" placeholder="🔍 Search for movies, shows, actors..." required="required" type="text"/>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Right menu items -->
+  <div class="menu-right">
+    <a href="https://paypalads.com/about-us" rel="nofollow" target="_blank">About</a>
+    <a href="https://paypalads.com/contact-us" rel="nofollow" target="_blank">Contact</a>
+    <a href="https://paypalads.com/job-visa-sponsorship-and-accommodation-benefits-in-ireland" rel="nofollow" target="_blank">Jobs</a>
+  </div>
+</div>
+
 <div style="position: relative; z-index: 9999;">
-  <iframe frameborder="0" height="535" scrolling="no"
+  <iframe frameborder="0" height="335" scrolling="no"
     src="https://lisathahanel.github.io/playmovie/chickman.html"
     width="100%">
   </iframe>
 </div>
 
 
-<div style="position: relative; z-index: 9999;">
-  <iframe frameborder="0" height="3600" scrolling="no"
-    src="https://paypalads.com/abcdefghijklmnopqrstuvwxyz"
-    width="100%">
-  </iframe>
-</div>
+<!-- ✅ Main Post Content -->
+<main>
+  <p />
+  <div class='separator' style='clear: both; text-align: center;'>
+    <a href='https://www.paypalads.com/home' style='margin-left: 1em; margin-right: 1em;'>
+      <img alt='free online courses with free certificates' border='0' data-original-height='200' data-original-width='200' height='200' src='https://blogger.googleusercontent.com/img/a/AVvXsEjptlQyV0mkOSNMfrOf6D0jW5UUmPygmjCjeEx8N6reodkwoJZljRHQE7jVRkMWywvOuX8PW7IWVvljSeIbdeXPUeHOLxhHCbz1evdThPCrsKvCZXji-4FxF6tuO7RJ2Z-0ufndSxLInOO4MVxEARVl7c43hCm-HYP-28dRIeDxpAf1p1W567rnIARgo3es' title='free online courses with free certificates' width='200' />
+    </a>
+  </div>
+  <br />
+  <p></p>
+  <div id="movie-label-posts"></div>
+
+  <style>
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .movie-card {
+      background: #111;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+      transition: transform 0.3s ease;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+
+    .poster {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 2 / 3;
+    }
+
+    .poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.4s ease-in-out;
+    }
+
+    .movie-card:hover img {
+      filter: brightness(0.5);
+      transform: scale(1.05);
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+      color: white;
+      background: rgba(229, 9, 20, 0.9);
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      line-height: 70px;
+      box-shadow: 0 0 20px #e50914;
+      pointer-events: none;
+    }
+
+    .movie-title {
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      background: #e50914;
+      color: white;
+      text-transform: capitalize;
+    }
+
+    @media (max-width: 600px) {
+      .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        padding: 15px;
+      }
+
+      .play-button {
+        font-size: 36px;
+        width: 55px;
+        height: 55px;
+        line-height: 55px;
+      }
+
+      .movie-title {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+
+  <script>
+    // Fetch latest 20 posts from WordPress REST API
+    fetch('https://paypalads.com/wp-json/wp/v2/posts?per_page=20&_embed')
+      .then(res => res.json())
+      .then(posts => {
+        let html = '<div class="movie-grid">';
+        posts.forEach(post => {
+          const title = post.title.rendered;
+          const url = post.link;
+          // Get featured image if exists
+          let imgUrl = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]
+            ? post._embedded['wp:featuredmedia'][0].source_url
+            : 'https://via.placeholder.com/300x450?text=No+Image';
+
+          html += `
+            <div class="movie-card">
+              <a href="${url}" title="${title}" target="_blank" rel="noopener noreferrer">
+                <div class="poster">
+                  <img src="${imgUrl}" alt="${title}">
+                  <div class="play-button">&#9658;</div>
+                </div>
+                <div class="movie-title">${title}</div>
+              </a>
+            </div>
+          `;
+        });
+        html += '</div>';
+        document.getElementById('movie-label-posts').innerHTML = html;
+      })
+      .catch(err => console.error('Error fetching posts:', err));
+  </script>
+</main>
 
 <style>
   .search-box {
@@ -137,6 +421,85 @@
 </style>
 
  <div style="background-color: white; color: black; font-family: Georgia, serif; padding: 10px; text-align: center;">
+<style>
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.video-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 50px auto;
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden; /* disables scrolling inside container */
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+  pointer-events: auto; /* ensure iframe is interactive */
+}
+</style>
+
+<div style="background-color: white; color: black; font-family: Georgia, serif; padding: 10px; text-align: center;">
+  <p>
+    
+   </p><p>
+
+<div class="video-container">
+  <iframe allowfullscreen="" scrolling="no" src="https://lisathahanel.github.io/playmovie/countdown.html"></iframe>
+</div>
+
+
+<style>
+  .search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto;
+    max-width: 500px;
+    width: 90%;
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    padding: 6px 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  .search-box input[type=&quot;text&quot;] {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 12px;
+    font-size: 16px;
+    border-radius: 30px;
+  }
+
+  .search-box button {
+    background: gold;
+    border: none;
+    outline: none;
+    padding: 10px 18px;
+    margin-left: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    transition: 0.3s;
+  }
+
+  .search-box button:hover {
+    background: #e6b800;
+  }
+</style>
+
   <p>
     <a href="https://www.paypalads.com/p/contact-us_14.html" rel="nofollow" style="background-color: white; border: 1px solid rgb(0, 0, 0); color: black; padding: 5px 10px; text-decoration: none;" target="_blank">Contact Us</a>&nbsp;<a href="https://www.firimumu.paypalads.com/" rel="nofollow" style="border: 1px solid rgb(0, 0, 0); color: black; padding: 5px 10px; text-decoration-line: none;" target="_blank">Movies</a>&nbsp;<a href="https://paypalads.com/privacy-policy" rel="nofollow" style="border: 1px solid rgb(0, 0, 0); color: black; padding: 5px 10px; text-decoration-line: none;" target="_blank">Privacy Policy</a></p>
   <p>
