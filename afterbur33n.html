@@ -26,45 +26,23 @@
 
 <!-- BOTTOM ANCHOR AD -->
 <div id="anchor-ad-bottom">
-  <div id="anchor-toggle-bottom">▲ Ad</div>
+  <div id="anchor-toggle-bottom">Ad (10)</div>
   <div id="anchor-content-bottom">
-    <!-- Ad rotation container -->
-    <div id="ad-rotation" style="width:100%;text-align:center;"></div>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"
+     crossorigin="anonymous"></script>
+<!-- 300 by 600 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-2269884583846743"
+     data-ad-slot="2038317814"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
   </div>
 </div>
 
-<!-- Load AdSense script once -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743" crossorigin="anonymous"></script>
-
-<script>
-  // All 9 ad slots (only <ins>, no <script> inside)
-  var ads = [
-    `<ins class="adsbygoogle" style="display:inline-block;width:768px;height:90px" data-ad-client="ca-pub-2269884583846743" data-ad-slot="5742141919"></ins>`,
-    `<ins class="adsbygoogle" style="display:inline-block;width:728px;height:150px" data-ad-client="ca-pub-2269884583846743" data-ad-slot="3580304316"></ins>`,
-    `<ins class="adsbygoogle" style="display:inline-block;width:250px;height:250px" data-ad-client="ca-pub-2269884583846743" data-ad-slot="4256856469"></ins>`,
-    `<ins class="adsbygoogle" style="display:inline-block;width:270px;height:90px" data-ad-client="ca-pub-2269884583846743" data-ad-slot="6412492966"></ins>`,
-    `<ins class="adsbygoogle" style="display:inline-block;width:125px;height:125px" data-ad-client="ca-pub-2269884583846743" data-ad-slot="9288129820"></ins>`,
-    `<ins class="adsbygoogle" style="display:inline-block;width:120px;height:240px" data-ad-client="ca-pub-2269884583846743" data-ad-slot="2349004732"></ins>`,
-    `<ins class="adsbygoogle" style="display:inline-block;width:234px;height:60px" data-ad-client="ca-pub-2269884583846743" data-ad-slot="7182958897"></ins>`,
-    `<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-2269884583846743" data-ad-slot="5836820037"></ins>`,
-    `<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-2269884583846743" data-ad-slot="2608021465"></ins>`
-  ];
-
-  var index = 0;
-
-  function rotateAd() {
-    var container = document.getElementById("ad-rotation");
-    container.innerHTML = ads[index];
-    (adsbygoogle = window.adsbygoogle || []).push({}); // reinit Adsense
-    index = (index + 1) % ads.length;
-  }
-
-  rotateAd(); // Load first ad
-  setInterval(rotateAd, 300000); // Rotate every 5 min
-</script>
-
 <style>
-/* -------- BOTTOM ANCHOR AD -------- */
+/* -------- BOTTOM AD -------- */
 #anchor-ad-bottom {
   position: fixed;
   top: 0;
@@ -84,10 +62,15 @@
   background: #f1f1f1;
   font-size: 13px;
   color: #333;
-  cursor: pointer;
+  cursor: not-allowed;
   padding: 4px;
   text-align: center;
   border-bottom: 1px solid #ddd;
+  user-select: none;
+}
+#anchor-toggle-bottom.enabled {
+  cursor: pointer;
+  user-select: auto;
 }
 #anchor-content-bottom {
   transition: all 0.3s ease;
@@ -111,28 +94,32 @@ const toggleBottom = document.getElementById("anchor-toggle-bottom");
 const contentBottom = document.getElementById("anchor-content-bottom");
 
 let hiddenBottom = false;
+let countdown = 10;
 
-// Manual toggle
-toggleBottom.addEventListener("click", function(){
-  if(!hiddenBottom){
-    contentBottom.style.display="none";
-    toggleBottom.innerHTML="▼ Ad";
+// Countdown timer
+const countdownInterval = setInterval(() => {
+  countdown--;
+  toggleBottom.textContent = `Ad (${countdown})`;
+  if (countdown <= 0) {
+    clearInterval(countdownInterval);
+    toggleBottom.textContent = "▲ Ad";
+    toggleBottom.classList.add("enabled");
+    toggleBottom.style.cursor = "pointer";
+    toggleBottom.addEventListener("click", toggleAd);
+  }
+}, 1000);
+
+function toggleAd() {
+  if (!hiddenBottom) {
+    contentBottom.style.display = "none";
+    toggleBottom.innerHTML = "▼ Ad";
     hiddenBottom = true;
   } else {
-    contentBottom.style.display="block";
-    toggleBottom.innerHTML="▲ Ad";
+    contentBottom.style.display = "block";
+    toggleBottom.innerHTML = "▲ Ad";
     hiddenBottom = false;
   }
-});
-
-// Auto-unminimize every 5 minutes
-setInterval(function(){
-  if(hiddenBottom){
-    contentBottom.style.display="block";
-    toggleBottom.innerHTML="▲ Ad";
-    hiddenBottom = false;
-  }
-}, 300000); // 5 min
+}
 </script>
 
 
