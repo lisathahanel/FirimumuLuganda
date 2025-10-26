@@ -301,8 +301,8 @@ async function searchPosts(e) {
 </style>
 
 <script>
-  // Fetch latest 20 posts from WordPress REST API
-  fetch('https://paypalads.com/wp-json/wp/v2/posts?per_page=20&_embed')
+  // Fetch latest 40 posts from WordPress REST API
+  fetch('https://paypalads.com/wp-json/wp/v2/posts?per_page=40&_embed')
     .then(res => res.json())
     .then(posts => {
       let html = '<div class="movie-grid">';
