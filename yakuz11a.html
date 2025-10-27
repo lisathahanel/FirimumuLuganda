@@ -24,11 +24,28 @@
     </div>
   </main>
 
-<!-- BOTTOM ANCHOR AD -->
+   <!-- ✅ SIDE FLOATING AD -->
+<div id="side-float-ad">
+  <div id="side-toggle">Ad (10)</div>
+  <div id="side-content">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"
+     crossorigin="anonymous"></script>
+<!-- 200 by 200 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:200px"
+     data-ad-client="ca-pub-2269884583846743"
+     data-ad-slot="1267838847"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  </div>
+</div>
+
+<!-- ✅ BOTTOM ANCHOR AD -->
 <div id="anchor-ad-bottom">
   <div id="anchor-toggle-bottom">Ad (10)</div>
   <div id="anchor-content-bottom">
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"
      crossorigin="anonymous"></script>
 <!-- 768 ad by 90 -->
 <ins class="adsbygoogle"
@@ -42,13 +59,55 @@
 </div>
 
 <style>
-/* -------- BOTTOM AD -------- */
+/* -------- SIDE FLOATING AD -------- */
+#side-float-ad {
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  width: 220px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+#side-toggle {
+  background: #f1f1f1;
+  font-size: 13px;
+  color: #333;
+  cursor: not-allowed;
+  padding: 5px 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  user-select: none;
+}
+#side-toggle.enabled {
+  cursor: pointer;
+  user-select: auto;
+  background: #e9e9e9;
+}
+#side-content {
+  transition: all 0.3s ease;
+  display: block;
+  padding: 4px;
+}
+/* Collapsed (slides partially off-screen) */
+#side-float-ad.collapsed {
+  right: -180px;
+  opacity: 0.8;
+}
+
+/* -------- BOTTOM ANCHOR AD -------- */
 #anchor-ad-bottom {
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999;
+  z-index: 9998;
   width: 100%;
   max-width: 768px;
   text-align: center;
@@ -81,42 +140,84 @@ body {
   padding-bottom: 120px;
 }
 
-/* Make ins responsive */
-#anchor-content-bottom ins {
-  width: 100% !important;
-  height: auto !important;
-  max-width: 768px;
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  #side-float-ad {
+    right: 5px;
+    width: 180px;
+    bottom: 50px;
+  }
+  #side-float-ad.collapsed {
+    right: -150px;
+  }
+  #anchor-content-bottom ins {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 768px;
+  }
 }
 </style>
 
 <script>
+/* -------- SIDE AD SCRIPT -------- */
+const sideToggle = document.getElementById("side-toggle");
+const sideContent = document.getElementById("side-content");
+const sideAd = document.getElementById("side-float-ad");
+
+let hiddenSide = false;
+let sideCountdown = 10;
+
+const sideInterval = setInterval(() => {
+  sideCountdown--;
+  sideToggle.textContent = `Ad (${sideCountdown})`;
+  if (sideCountdown <= 0) {
+    clearInterval(sideInterval);
+    sideToggle.textContent = "🔼 Ad"; // up arrow emoji
+    sideToggle.classList.add("enabled");
+    sideToggle.addEventListener("click", toggleSideAd);
+  }
+}, 1000);
+
+function toggleSideAd() {
+  if (!hiddenSide) {
+    sideContent.style.display = "none";
+    sideToggle.innerHTML = "🔽 Ad"; // down arrow emoji
+    sideAd.classList.add("collapsed");
+    hiddenSide = true;
+  } else {
+    sideContent.style.display = "block";
+    sideToggle.innerHTML = "🔼 Ad";
+    sideAd.classList.remove("collapsed");
+    hiddenSide = false;
+  }
+}
+
+/* -------- BOTTOM AD SCRIPT -------- */
 const toggleBottom = document.getElementById("anchor-toggle-bottom");
 const contentBottom = document.getElementById("anchor-content-bottom");
 
 let hiddenBottom = false;
-let countdown = 10;
+let bottomCountdown = 10;
 
-// Countdown timer
-const countdownInterval = setInterval(() => {
-  countdown--;
-  toggleBottom.textContent = `Ad (${countdown})`;
-  if (countdown <= 0) {
-    clearInterval(countdownInterval);
-    toggleBottom.textContent = "▲ Ad";
+const bottomInterval = setInterval(() => {
+  bottomCountdown--;
+  toggleBottom.textContent = `Ad (${bottomCountdown})`;
+  if (bottomCountdown <= 0) {
+    clearInterval(bottomInterval);
+    toggleBottom.textContent = "🔼 Ad"; // up arrow emoji
     toggleBottom.classList.add("enabled");
-    toggleBottom.style.cursor = "pointer";
-    toggleBottom.addEventListener("click", toggleAd);
+    toggleBottom.addEventListener("click", toggleBottomAd);
   }
 }, 1000);
 
-function toggleAd() {
+function toggleBottomAd() {
   if (!hiddenBottom) {
     contentBottom.style.display = "none";
-    toggleBottom.innerHTML = "▼ Ad";
+    toggleBottom.innerHTML = "🔽 Ad"; // down arrow emoji
     hiddenBottom = true;
   } else {
     contentBottom.style.display = "block";
-    toggleBottom.innerHTML = "▲ Ad";
+    toggleBottom.innerHTML = "🔼 Ad";
     hiddenBottom = false;
   }
 }
@@ -511,125 +612,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 <p style="background-color: white; border-top: 1px solid rgb(0, 0, 0); color: black; font-family: Georgia, serif; padding: 8px; text-align: center;">Copyright © 2025 Paypalads.com All Rights Reserved</p><p style="background-color: white; border-top: 1px solid rgb(0, 0, 0); color: black; font-family: Georgia, serif; padding: 8px; text-align: center;"><br /></p>
 
-<!-- SIDE FLOATING AD -->
-<div id="side-float-ad">
-  <div id="side-toggle">Ad (10)</div>
-  <div id="side-content">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2269884583846743"
-     crossorigin="anonymous"></script>
-    <!-- Example 200x200 Ad -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:200px;height:200px"
-         data-ad-client="ca-pub-2269884583846743"
-         data-ad-slot="1267838847"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-</div>
 
-<style>
-/* -------- SIDE FLOATING AD -------- */
-#side-float-ad {
-  position: fixed;
-  bottom: 60px;           /* moved up ~3 steps from previous (was 30px) */
-  right: 10px;
-  width: 220px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  overflow: hidden;
-  z-index: 9999;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  transition: all 0.4s ease;
-}
-
-#side-toggle {
-  background: #f1f1f1;
-  font-size: 13px;
-  color: #333;
-  cursor: not-allowed;
-  padding: 5px 8px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-  user-select: none;
-  transition: background 0.3s;
-}
-
-#side-toggle.enabled {
-  cursor: pointer;
-  user-select: auto;
-  background: #e9e9e9;
-}
-
-#side-content {
-  transition: all 0.3s ease;
-  display: block;
-  padding: 4px;
-}
-
-/* Collapsed (slides partially off-screen) */
-#side-float-ad.collapsed {
-  right: -180px; /* slides mostly off the side */
-  opacity: 0.8;
-}
-
-/* Responsive for mobile */
-@media (max-width: 600px) {
-  #side-float-ad {
-    right: 5px;
-    width: 180px;
-    bottom: 50px;
-  }
-  #side-float-ad.collapsed {
-    right: -150px;
-  }
-  #side-content ins {
-    width: 100% !important;
-    height: auto !important;
-  }
-}
-</style>
-
-<script>
-const sideToggle = document.getElementById("side-toggle");
-const sideContent = document.getElementById("side-content");
-const sideAd = document.getElementById("side-float-ad");
-
-let hiddenSide = false;
-let countdown = 10;
-
-// Countdown lock
-const countdownInterval = setInterval(() => {
-  countdown--;
-  sideToggle.textContent = `Ad (${countdown})`;
-  if (countdown <= 0) {
-    clearInterval(countdownInterval);
-    sideToggle.textContent = "▲ Ad";
-    sideToggle.classList.add("enabled");
-    sideToggle.style.cursor = "pointer";
-    sideToggle.addEventListener("click", toggleSideAd);
-  }
-}, 1000);
-
-function toggleSideAd() {
-  if (!hiddenSide) {
-    // Collapse: hide content and slide ad to side
-    sideContent.style.display = "none";
-    sideToggle.innerHTML = "▼ Ad";
-    sideAd.classList.add("collapsed");
-    hiddenSide = true;
-  } else {
-    // Expand: bring back
-    sideContent.style.display = "block";
-    sideToggle.innerHTML = "▲ Ad";
-    sideAd.classList.remove("collapsed");
-    hiddenSide = false;
-  }
-}
-</script>
   
 </body>
 </html>
